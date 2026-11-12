@@ -165,7 +165,7 @@ catalog:
   #
   # Vitest already resolves a transitive copy of Vite; this entry is the direct,
   # version-pinned one, so the two cannot disagree about which major is in play.
-  vite: ^8.3.5
+  vite: ^8.3.6
   # Exact, and equal to '@vitest/coverage-v8' above — see the note there.
   vitest: 5.1.0
   # Floor set by `@cloudflare/vite-plugin`'s peer range (^4.127.0), not chosen
