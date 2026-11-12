@@ -168,8 +168,8 @@ catalogs:
       specifier: ^1.67.0
       version: 1.67.0
     '@cloudflare/workers-types':
-      specifier: ^5.20261103.1
-      version: 5.20261103.1
+      specifier: ^5.20261104.1
+      version: 5.20261104.1
     '@fontsource-variable/inter':
       specifier: ^5.3.0
       version: 5.3.0
@@ -336,7 +336,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   app/apex:
     dependencies:
@@ -349,10 +349,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@orangeopensource/hurl':
         specifier: 'catalog:'
         version: 8.1.0(supports-color@10.2.2)
@@ -406,7 +406,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   app/core:
     dependencies:
@@ -431,10 +431,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -512,7 +512,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   app/docs:
     dependencies:
@@ -534,10 +534,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -609,7 +609,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   app/help:
     dependencies:
@@ -631,10 +631,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -706,7 +706,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   app/info:
     dependencies:
@@ -728,10 +728,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -803,7 +803,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   app/news:
     dependencies:
@@ -825,10 +825,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -900,7 +900,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   com/apex:
     dependencies:
@@ -913,10 +913,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@orangeopensource/hurl':
         specifier: 'catalog:'
         version: 8.1.0(supports-color@10.2.2)
@@ -970,7 +970,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   com/core:
     dependencies:
@@ -995,10 +995,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1076,7 +1076,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   com/docs:
     dependencies:
@@ -1098,10 +1098,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1173,7 +1173,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   com/help:
     dependencies:
@@ -1195,10 +1195,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1270,7 +1270,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   com/info:
     dependencies:
@@ -1292,10 +1292,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1367,7 +1367,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   com/news:
     dependencies:
@@ -1389,10 +1389,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1464,7 +1464,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   dev/apex:
     dependencies:
@@ -1477,10 +1477,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@orangeopensource/hurl':
         specifier: 'catalog:'
         version: 8.1.0(supports-color@10.2.2)
@@ -1534,7 +1534,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   net/apex:
     dependencies:
@@ -1547,10 +1547,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@orangeopensource/hurl':
         specifier: 'catalog:'
         version: 8.1.0(supports-color@10.2.2)
@@ -1604,7 +1604,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   org/apex:
     dependencies:
@@ -1617,10 +1617,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@orangeopensource/hurl':
         specifier: 'catalog:'
         version: 8.1.0(supports-color@10.2.2)
@@ -1674,7 +1674,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   org/core:
     dependencies:
@@ -1699,10 +1699,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1780,7 +1780,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   org/docs:
     dependencies:
@@ -1802,10 +1802,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1877,7 +1877,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   org/help:
     dependencies:
@@ -1899,10 +1899,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -1974,7 +1974,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   org/info:
     dependencies:
@@ -1996,10 +1996,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -2071,7 +2071,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
   org/news:
     dependencies:
@@ -2093,10 +2093,10 @@ importers:
     devDependencies:
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))
+        version: 1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))
       '@cloudflare/workers-types':
         specifier: 'catalog:'
-        version: 5.20261103.1
+        version: 5.20261104.1
       '@inlang/paraglide-js':
         specifier: 'catalog:'
         version: 3.0.0(typescript@7.0.2)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
@@ -2168,7 +2168,7 @@ importers:
         version: 5.1.0(@types/node@26.6.6)(@vitest/coverage-v8@5.1.0)(happy-dom@21.0.4)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+        version: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
 
 packages:
 
@@ -2397,8 +2397,8 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  '@cloudflare/workers-types@5.20261103.1':
-    resolution: {integrity: sha512-3trekYqEHw3YT8yhMqZaEEW91TZDJXt9XWbwKO+L17rG5iuhdKNY0dk56Rdif+5mABY/8xvu5qIRiyVWMW0OUw==}
+  '@cloudflare/workers-types@5.20261104.1':
+    resolution: {integrity: sha512-XSPcK88JXnW/oC82wuXvaP7vgyk2myydugbgOd/RcLKwqkwW0cP09Ozp9ItACa4IAZ7uKtMIfxZpUTXajYVd1Q==}
 
   '@cspell/cspell-bundled-dicts@10.4.0':
     resolution: {integrity: sha512-ey23dut7NdnOsQQinQhROFZUh4LvLhJnnZCiq7y+KXMngdqXnIAZuEnnwXk3IfdOX+tycDC8OuMssLXDJ3Fnxw==}
@@ -5818,13 +5818,13 @@ snapshots:
     optionalDependencies:
       workerd: 1.20261102.1
 
-  '@cloudflare/vite-plugin@1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6))':
+  '@cloudflare/vite-plugin@1.67.0(@types/node@26.6.6)(vite@8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1))(workerd@1.20261102.1)(wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6))':
     dependencies:
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261102.1)
       miniflare: 5.20261101.0-beta(@types/node@26.6.6)
       unenv: 2.0.0-rc.24
       vite: 8.3.5(@types/node@26.6.6)(esbuild@0.28.2)(jiti@2.7.0)(yaml@2.9.1)
-      wrangler: 4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6)
+      wrangler: 4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6)
       ws: 8.22.0
     transitivePeerDependencies:
       - '@types/node'
@@ -5862,7 +5862,7 @@ snapshots:
   '@cloudflare/workerd-windows-64@1.20261102.1':
     optional: true
 
-  '@cloudflare/workers-types@5.20261103.1': {}
+  '@cloudflare/workers-types@5.20261104.1': {}
 
   '@cspell/cspell-bundled-dicts@10.4.0':
     dependencies:
@@ -8532,7 +8532,7 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20261102.1
       '@cloudflare/workerd-windows-64': 1.20261102.1
 
-  wrangler@4.156.2(@cloudflare/workers-types@5.20261103.1)(@types/node@26.6.6):
+  wrangler@4.156.2(@cloudflare/workers-types@5.20261104.1)(@types/node@26.6.6):
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
       '@cloudflare/unenv-preset': 2.16.2(unenv@2.0.0-rc.24)(workerd@1.20261102.1)
@@ -8544,7 +8544,7 @@ snapshots:
       unenv: 2.0.0-rc.24
       workerd: 1.20261102.1
     optionalDependencies:
-      '@cloudflare/workers-types': 5.20261103.1
+      '@cloudflare/workers-types': 5.20261104.1
       fsevents: 2.3.3
     transitivePeerDependencies:
       - '@types/node'
