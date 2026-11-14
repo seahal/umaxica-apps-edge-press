@@ -11,6 +11,8 @@ worker
 **/.astro/
 
 worker-configuration.d.ts
+# Wrangler-generated environment types, including leftovers from moved units.
+cloudflare-env.d.ts
 
 # Scratch output. tools/verify-edge-connectivity.mjs writes its per-child logs to
 # tmp/connectivity-check/ so a failing run keeps the full output without the

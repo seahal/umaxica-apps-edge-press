@@ -16,9 +16,9 @@ Neither is health. `/health` and `/api/v0/health.json` remain separate contracts
 
 ## Authority
 
-Cloudflare Workers `version_metadata` (`id`, `tag`, `timestamp`). Apex binds it
-as `CF_VERSION_METADATA`. Frames bind it as `REVISION`. The HTTP contract does
-not depend on the binding name.
+Cloudflare Workers `version_metadata` (`id`, `tag`, `timestamp`). The Press
+cells bind it as `REVISION`. The HTTP contract does not depend on the binding
+name.
 
 Do not derive revision from Git SHA, package version, build time, Rails, or
 Workers VPC.
@@ -52,7 +52,7 @@ unknown
 `Accept` is ignored. The URL fixes the representation. No redirect, no language
 cookie, no HTML.
 
-Hurl owns this representation, beside the JSON one: `<unit>/api/revision-api.hurl`.
+Hurl owns this representation, beside the JSON one: each Press unit's `api/revision-api.hurl`.
 
 ## `/api/v0/revision.json`
 
@@ -80,14 +80,10 @@ Exactly three keys. Local development without the binding returns:
 `Accept` is ignored; incompatible `Accept` values still receive JSON (same
 policy as `/api/v0/health.json`). No 406.
 
-Hurl owns this representation: `<unit>/api/revision-api.hurl`.
+Hurl owns this representation: each Press unit's `api/revision-api.hurl`.
 
 ## Units
 
 | Runtime        | Units                                 | Mechanism                                                           |
 | -------------- | ------------------------------------- | ------------------------------------------------------------------- |
-| Hono           | `{app,com,org,net,dev}/apex`          | `create-apex-app.ts`                                                |
-| TanStack Start | `{app,com,org}/core`                  | `src/routes/revision.ts` and `src/routes/api.v0.revision[.]json.ts` |
 | TanStack Start | `{app,com,org}/{docs,help,info,news}` | `src/routes/revision.ts` and `src/routes/api.v0.revision[.]json.ts` |
-
-No Next.js unit remains active.

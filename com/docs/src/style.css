@@ -87,7 +87,7 @@
 /*
  * TLD identity wash. `--ui-tint` stays off `@theme` so `bg-tint` / `text-tint`
  * are not generated. The mix lives on `--ui-canvas`; `--color-canvas` is the
- * theme alias that makes `bg-canvas` (docs/design/visual-identity-matrix.md).
+ * theme alias that makes `bg-canvas` (docs/design/ui-shell-contract.md).
  */
 :root {
   --ui-tint: var(--color-indigo-500);

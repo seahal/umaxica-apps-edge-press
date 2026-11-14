@@ -2,13 +2,18 @@
 set -euo pipefail
 
 checks=(
-  'com/apex|http://127.0.0.1:5101/api/v0/health.json'
-  'com/core|http://127.0.0.1:5105/health'
-  'net/apex|http://127.0.0.1:5201/api/v0/health.json'
-  'org/apex|http://127.0.0.1:5301/api/v0/health.json'
-  'org/core|http://127.0.0.1:5305/health'
-  'app/apex|http://127.0.0.1:5401/api/v0/health.json'
-  'app/core|http://127.0.0.1:5405/health'
+  'com/docs|http://127.0.0.1:5106/health'
+  'com/help|http://127.0.0.1:5108/health'
+  'com/info|http://127.0.0.1:5103/health'
+  'com/news|http://127.0.0.1:5107/health'
+  'org/docs|http://127.0.0.1:5306/health'
+  'org/help|http://127.0.0.1:5308/health'
+  'org/info|http://127.0.0.1:5303/health'
+  'org/news|http://127.0.0.1:5307/health'
+  'app/docs|http://127.0.0.1:5406/health'
+  'app/help|http://127.0.0.1:5408/health'
+  'app/info|http://127.0.0.1:5403/health'
+  'app/news|http://127.0.0.1:5407/health'
 )
 
 failed=0

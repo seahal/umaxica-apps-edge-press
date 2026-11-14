@@ -1,13 +1,7 @@
-import { cloudflare } from '@cloudflare/vite-plugin';
-import { paraglideVitePlugin } from '@inlang/paraglide-js';
-import tailwindcss from '@tailwindcss/vite';
-import { tanstackStart } from '@tanstack/react-start/plugin/vite';
-import viteReact from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
+import { defineConfig, lazyPlugins } from 'vite-plus';
 
 /*
- * Vite is a BUILD tool here and nothing else, exactly as in the Cores and the
- * apex Workers (adr/012-apex-vite-build-and-static-assets.md). `vite build`
+ * Vite+ `vp build` invokes Vite as the production build tool for this Press cell.
  * emits the Worker bundle, the hashed client assets, and an output
  * `wrangler.json` that `wrangler deploy` reads on its own. There is no Vite in
  * the request path and no Node server in production.
@@ -35,7 +29,7 @@ import { defineConfig } from 'vite';
  * The two flags that select the direct Rails transport in
  * `src/lib/rails-client.ts`, bridged from the shell into the Worker.
  *
- * `vite dev` runs the Worker in workerd, whose `process.env` is built from the
+ * `vp dev` runs the Worker in workerd, whose `process.env` is built from the
  * Worker's own vars and NOT from the shell — so `EDGE_LOCAL_NODE_RUNTIME=1` in
  * the dev script and `EDGE_LOCAL_RAILS_ENABLED` from the container-wide Rails
  * overlay do not reach it on their own. Only names that are already set are
@@ -68,7 +62,7 @@ function forwardLocalRailsFlags(config: { vars?: Record<string, unknown> }): voi
  * The plugin defaults it to TRUE. A Workers VPC Service has no local simulator,
  * so with the default, any command that resolves a configuration declaring
  * `vpc_services` opens a remote proxy session that only an interactive
- * `wrangler login` can authenticate — `vite preview` of the production config
+ * `wrangler login` can authenticate — `vp preview` of the production config
  * failed outright without credentials (measured 2026-08-22). `env.vpc` is the
  * one tier whose purpose is the real remote binding, so it is the one tier that
  * opts back in; everything else, including CI, stays credential-free.
@@ -91,26 +85,42 @@ export default defineConfig(({ command }) => ({
   // served as public static assets.
   environments: { ssr: { build: { sourcemap: true } } },
   define: { 'import.meta.env.PUBLIC_REGION': JSON.stringify(publicRegion) },
-  // The Cloudflare Tunnel forwards the browser's Host unchanged, so `vite dev`
+  // The Cloudflare Tunnel forwards the browser's Host unchanged, so `vp dev`
   // sees the public hostname and refuses it: Vite allowlists Hosts to block DNS
   // rebinding. Only this unit's own tunnel hostnames are listed — never `true`.
   server: { allowedHosts: ['docs-jp.umaxica.org', 'docs-us.umaxica.org'] },
-  plugins: [
-    paraglideVitePlugin({
-      project: './project.inlang',
-      outdir: './src/paraglide',
-      strategy: ['custom-edge-locale', 'baseLocale'],
-      outputStructure: 'locale-modules',
-      isServer: 'import.meta.env.SSR',
-    }),
-    tailwindcss(),
-    cloudflare({
-      inspectorPort: 9306,
-      viteEnvironment: { name: 'ssr' },
-      remoteBindings: wantsRemoteBindings,
-      ...(command === 'serve' ? { config: forwardLocalRailsFlags } : {}),
-    }),
-    tanstackStart(),
-    viteReact(),
-  ],
+  plugins:
+    lazyPlugins(async () => {
+      const [
+        { cloudflare },
+        { paraglideVitePlugin },
+        { default: tailwindcss },
+        { tanstackStart },
+        { default: viteReact },
+      ] = await Promise.all([
+        import('@cloudflare/vite-plugin'),
+        import('@inlang/paraglide-js'),
+        import('@tailwindcss/vite'),
+        import('@tanstack/react-start/plugin/vite'),
+        import('@vitejs/plugin-react'),
+      ]);
+      return [
+        paraglideVitePlugin({
+          project: './project.inlang',
+          outdir: './src/paraglide',
+          strategy: ['custom-edge-locale', 'baseLocale'],
+          outputStructure: 'locale-modules',
+          isServer: 'import.meta.env.SSR',
+        }),
+        tailwindcss(),
+        cloudflare({
+          inspectorPort: 9306,
+          viteEnvironment: { name: 'ssr' },
+          remoteBindings: wantsRemoteBindings,
+          ...(command === 'serve' ? { config: forwardLocalRailsFlags } : {}),
+        }),
+        tanstackStart(),
+        viteReact(),
+      ];
+    }) ?? [],
 }));

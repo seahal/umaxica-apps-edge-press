@@ -14,7 +14,7 @@
 // in another terminal still works exactly as it did.
 //
 // The server it starts is `pnpm run serve:api`: the Worker BUILT, then served by
-// `vite preview`. Not `vite dev`, whose on-demand compile made the first
+// `vp preview`. Not `vp dev`, whose on-demand compile made the first
 // requests on a small CI runner outlast the response budget and answer 503 —
 // failures of the dev server, not of the contract under test.
 
@@ -34,7 +34,7 @@ const EXTERNAL_BASE = process.env['EDGE_API_BASE'];
 const BASE = EXTERNAL_BASE ?? `http://localhost:${PORT}`;
 
 // Matches the `webServer.timeout` every playwright.config.ts in this repository
-// uses. A cold `vite dev` / `wrangler dev` is slow enough that a shorter budget
+// uses. A cold `vp dev` / `wrangler dev` is slow enough that a shorter budget
 // reports a timeout where the real answer is "not finished compiling yet".
 const READY_TIMEOUT_MS = 240_000;
 const POLL_INTERVAL_MS = 500;
@@ -68,7 +68,7 @@ async function isReady() {
 }
 
 function startServer() {
-  // `detached` puts the server in its own process group. `vite dev` and
+  // `detached` puts the server in its own process group. `vp dev` and
   // `wrangler dev` both fork children that outlive a bare `child.kill()`, and an
   // orphaned worker holding the port makes the NEXT run reuse a stale server.
   const server = spawn('pnpm', ['run', 'serve:api'], {
@@ -153,7 +153,7 @@ const ISOLATION_ARGS = ['--repeat', '50', '--jobs', '10', '--glob', 'api/isolati
 
 // The canary compares the nonce in the CSP header with the nonce in the
 // document, so it only means something against a server that issues one: the
-// built Worker `serve:api` starts, or a deployment. A reused `vite dev` server
+// built Worker `serve:api` starts, or a deployment. A reused `vp dev` server
 // sends the development policy (`'unsafe-inline'`, no nonce); there the canary
 // is skipped out loud rather than failed, exactly as `api/security-headers.hurl`
 // accepts either policy.

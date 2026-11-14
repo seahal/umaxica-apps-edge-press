@@ -4,14 +4,13 @@ import { brandTitle } from './title';
  * First-touch rate limiting for this content unit, and the 429 document it
  * answers with.
  *
- * `adr/010-first-touch-rate-limiting.md` puts the limiter at whatever this unit's
- * first-touch hook is. The three Cores call it from `src/worker.ts`; this unit
- * calls it from `src/request-handler.ts`, before the router runs.
+ * `adr/010-first-touch-rate-limiting.md` puts the limiter at this unit's
+ * first-touch hook in `src/request-handler.ts`, before the router runs.
  *
  * The limiter is a parameter rather than a module-scope `env` read. That keeps
  * this file free of `cloudflare:workers`, so the root
  * `test/html-title-contract.test.ts` guard can drive it directly with an
- * injected limiter, exactly as it drives the Cores and the apex Workers.
+ * injected limiter, exactly as it does for every other Press cell.
  *
  * An absent binding is a no-op: `vite dev` has no rate limiter bound, and a
  * local loop that rate-limited itself would be a worse contract than one that

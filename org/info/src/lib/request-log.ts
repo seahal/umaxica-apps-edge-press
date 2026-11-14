@@ -2,7 +2,7 @@
  * The completion log for a TanStack Start Edge request.
  *
  * This is deliberately a small, local emitter rather than Hono middleware:
- * the fifteen TanStack units do not carry Hono into their server entry. The
+ * the twelve Press units do not carry Hono into their server entry. The
  * fields are closed so a call site cannot add a pathname, query, header, body,
  * exception text or another free-form value to a Workers Log line.
  */

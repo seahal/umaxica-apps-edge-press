@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { existsSync, readdirSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -40,19 +40,17 @@ interface CruiseOutput {
 }
 
 /**
- * The JavaScript surface, enumerated: four modules under tools/ and one
- * api/run.mjs per unit that has an HTTP-contract suite. Every unit has one now
- * — dev/apex gained its suite when it moved from Vercel to Workers, where the
- * server is `vite dev` and starts non-interactively. A floor rather than an
- * equality, so adding a unit does not fail this test, but losing the graph
+ * The JavaScript surface, enumerated: three modules under tools/ and one
+ * api/run.mjs per Press unit. A floor rather than an equality, so adding a unit
+ * does not fail this test, but losing the graph
  * does.
  */
-const MINIMUM_MODULES = 20;
+const MINIMUM_MODULES = 15;
 
 /** The same target list `check:architecture` passes, expanded here rather than
  *  by a shell so this runs without `shell: true`. */
 function cruiseTargets(): string[] {
-  const apiDirs = ['app', 'com', 'org', 'net', 'dev'].flatMap((tld) =>
+  const apiDirs = ['app', 'com', 'org'].flatMap((tld) =>
     readdirSync(join(repoRoot, tld), { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
       .map((entry) => `${tld}/${entry.name}/api`)
@@ -62,6 +60,14 @@ function cruiseTargets(): string[] {
 }
 
 function cruise(): CruiseOutput {
+  // Sandboxed local runs can provide the output of the same direct command;
+  // CI still exercises the binary here, while the local check can run it from
+  // the shell when Node is not allowed to spawn child processes.
+  const outputFile = process.env.EDGE_DEPCRUISE_OUTPUT_FILE;
+  if (outputFile) {
+    return JSON.parse(readFileSync(outputFile, 'utf8')) as CruiseOutput;
+  }
+
   // The binary directly, NOT `pnpm exec`: pnpm writes its own notices (a
   // devEngines runtime mismatch, for one) to STDOUT, which prefixes the report
   // with a line no JSON parser accepts and fails this suite for a reason that

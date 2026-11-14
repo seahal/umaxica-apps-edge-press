@@ -1,6 +1,8 @@
 # ADR 008: Edge development surfaces are published through the Rails-owned Tunnel
 
-> Superseded for app/com/org apex only by [ADR 024](024-retire-app-com-org-apex-units.md). The record below is unchanged history.
+> The hostname rows for Apex and Core are historical here: those units moved to
+> `umaxica-apps-edge-zenith` and `umaxica-apps-edge-sphere`. Press tunnel
+> operation is recorded in [ADR 014](014-edge-owned-development-tunnel.md).
 
 ## Status: Superseded by ADR 014
 

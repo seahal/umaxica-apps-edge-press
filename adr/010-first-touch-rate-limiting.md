@@ -9,6 +9,10 @@
 
 ## Status: Implemented
 
+> Current Press scope: the twelve public cells retain their own first-touch
+> rate-limit path. Core-specific implementation details below moved to
+> `umaxica-apps-edge-sphere` and are historical in this copy.
+
 ## Context
 
 The three Core frames called the rate limiter from two places, against the same

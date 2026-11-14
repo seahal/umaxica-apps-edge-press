@@ -1,5 +1,7 @@
 # ADR 027: Reintroduce the app/com/org apex deployment units
 
+> Superseded: moved to `umaxica-apps-edge-zenith` with the Apex units.
+
 ## Status: Accepted 2026-10-14 — repository change only; Cloudflare cutover pending
 
 Supersedes [ADR 024](024-retire-app-com-org-apex-units.md) Decisions 1, 2, 3

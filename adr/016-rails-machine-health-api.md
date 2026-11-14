@@ -1,5 +1,9 @@
 # ADR 016: Edge verifies Rails through the machine-facing Health API
 
+> Current Press scope: Rails Health API consumption remains active for the
+> twelve public cells. Core and Apex implementation references below are
+> historical after their move to Sphere and Zenith.
+
 ## Status: Implemented — required fields extended, see [Amendment 2026-09-06](#amendment-2026-09-06-timestamp-is-required-namespace-is-additive)
 
 Amends [ADR 009](009-rails-health-entrypoint-and-dispatch-operability.md)

@@ -2,6 +2,10 @@
 
 ## Status: Completed
 
+> Current Press scope: the twelve public content cells use the VPC transport
+> described here. Core transport material moved to `umaxica-apps-edge-sphere`;
+> Apex units moved to `umaxica-apps-edge-zenith`.
+
 ## Supersedes
 
 ADR 001 (`001-rails-health-check.md`). That record describes a `RAILS_API_URL`
@@ -327,9 +331,9 @@ transport from this repository. production needs a deployed Worker; development
 needs the Rails-side Access application and hostname, which do not exist yet —
 see the operations docs.
 
-Operational procedure lives in `docs/operations/cloudflare-tunnel-development.md`
-(local tunnel) and `docs/operations/cloudflare-access.md` (who may reach a
-tunnelled hostname, and the Rails-side application the dev transport needs).
+The current Press procedures live in
+`docs/development/cloudflare-development-network.md` and
+`docs/operations/cloudflare-tunnel-development.md`.
 
 # Historical note
 

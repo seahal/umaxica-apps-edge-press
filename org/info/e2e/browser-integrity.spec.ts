@@ -14,7 +14,7 @@ import { expect, test } from '@playwright/test';
  * because the production host allowlist applies. Point `baseURL` at a preview
  * deployment to exercise it. The script-error half works everywhere.
  *
- * Byte-identical across all seventeen units, so it asserts nothing about a
+ * Byte-identical across all twelve Press units, so it asserts nothing about a
  * unit's copy: only that the home document loads clean.
  */
 

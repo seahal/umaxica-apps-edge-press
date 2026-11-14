@@ -1,6 +1,6 @@
 # Edge self-health API
 
-Machine-facing JSON for **this Edge runtime only**.
+Machine-facing JSON for **the Press Worker runtime only**.
 
 ```text
 GET /api/v0/health.json
@@ -77,12 +77,8 @@ Health API consumer, and Edge is not Rails.
 
 ## Units
 
-| Runtime        | Units                                 | Mechanism                                         |
-| -------------- | ------------------------------------- | ------------------------------------------------- |
-| Hono           | `{app,com,org,net,dev}/apex`          | `create-apex-app.ts`                              |
-| TanStack Start | `{app,com,org}/core`                  | Server Route `src/routes/api.v0.health[.]json.ts` |
-| TanStack Start | `{app,com,org}/{docs,help,info,news}` | `src/routes/api.v0.health[.]json.ts`              |
-
-No Next.js unit remains active.
+| Runtime        | Units                                 | Mechanism                            |
+| -------------- | ------------------------------------- | ------------------------------------ |
+| TanStack Start | `{app,com,org}/{docs,help,info,news}` | `src/routes/api.v0.health[.]json.ts` |
 
 HTTP contract: `api/health-api.hurl` in each unit (`pnpm --dir <unit> run test:api`).

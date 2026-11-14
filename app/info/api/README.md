@@ -20,7 +20,7 @@ when nothing does, and then it stops the whole process group it started. Running
 `pnpm run dev` in another terminal therefore behaves as it always did.
 
 The server it starts is `pnpm run serve:api` — the Worker built, then served by
-`vite preview` — not `vite dev`. A dev server compiles each route on its first
+`vp preview` — not `vp dev`. A dev server compiles each route on its first
 request, and on a small CI runner that alone outlasted the response budget and
 answered 503: a failure of the dev server, not of the contract.
 
@@ -44,7 +44,7 @@ AsyncLocalStorage store is really per request in the Workers runtime. Vitest
 cannot say that — its store is Node's and its requests never overlap.
 
 It is skipped, with a line saying so, when the server sends no nonce (a reused
-`vite dev` server sends the development policy).
+`vp dev` server sends the development policy).
 
 Two things are deliberately NOT asserted there, because nothing local can
 observe them honestly:
@@ -95,7 +95,7 @@ stayed green if that wiring had been deleted outright.
 
 One assertion did come back to Vitest, in
 `test/content-security-policy.test.ts`, and the reason is the mirror image:
-`script-src` carries `'unsafe-eval'` under `vite dev` and must not carry it in a
+`script-src` carries `'unsafe-eval'` under `vp dev` and must not carry it in a
 build, and this runner may be answered by either (it reuses a running `pnpm
 dev`). This file accepts either policy on a real response; that a build's nonce
 is fresh per response needs two responses compared, so that is asserted there.

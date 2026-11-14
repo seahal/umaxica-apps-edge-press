@@ -1,5 +1,9 @@
 # ADR 017: Edge self-health machine API
 
+> Current Press scope: the self-health contract remains active for the twelve
+> public cells. Apex and Core implementation references below moved to Zenith
+> and Sphere and are historical in this copy.
+
 ## Status: Implemented
 
 Amends [ADR 016](016-rails-machine-health-api.md) by adding the **Edge**

@@ -1,4 +1,9 @@
-# ADR 013: The fifteen frames run TanStack Start on Vite, not Next.js on OpenNext
+# ADR 013: The Press content surfaces run TanStack Start on Vite
+
+> Current Press scope: the twelve `{app,com,org}/{docs,help,info,news}` cells.
+> Counts and descriptions of the former combined estate below are historical;
+> Core moved to Sphere and Apex moved to Zenith. Vite+ (`vp`) is now the local
+> CLI and invokes the Vite build for these cells.
 
 ## Status: Implemented 2026-08-23 — CONDITIONAL GO
 

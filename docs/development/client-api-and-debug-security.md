@@ -24,7 +24,7 @@
   秘密情報や管理用の認証情報をクライアントコードに置かない。
 
 Edge が Rails へ中継する処理では、実際の操作を所有する Rails 側でも認証と認可を検証する。
-境界の詳細は [Edge と Rails の信頼境界](edge-rails-proxy-trust-boundary.md) を参照する。
+Press の公開セルは Rails の公開コンテンツ API に対して匿名の読み取り専用 GET のみを行う。Rails への認証済み中継や一般化されたプロキシは実装しない。詳細は [Public Information Surfaces](../public-information-surfaces.md) を参照する。
 
 ## 開発用コードをデプロイに混入させない
 

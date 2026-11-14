@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 const repoRoot = join(import.meta.dirname, '..');
 const frames = [
   ...['app', 'com', 'org'].flatMap((audience) =>
-    ['core', 'docs', 'help', 'info', 'news'].map((surface) => `${audience}/${surface}`),
+    ['docs', 'help', 'info', 'news'].map((surface) => `${audience}/${surface}`),
   ),
 ];
 

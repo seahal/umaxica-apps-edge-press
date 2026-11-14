@@ -62,7 +62,7 @@ const statuses = new Set(['pass', 'warn', 'fail']);
 const check = (value) =>
   typeof value === 'object' && value !== null && statuses.has(value.status);
 
-// Kept identical to `TIMEZONE_AWARE_TIMESTAMP` in the fifteen
+// Kept identical to `TIMEZONE_AWARE_TIMESTAMP` in the twelve
 // `src/lib/rails-health.ts` copies, and pinned as such by
 // `test/rails-connection-invariants.test.ts`. A bare local time is rejected:
 // two sides of a tunnel do not share a clock offset, so a timestamp without a
@@ -102,7 +102,7 @@ NODE
 }
 
 for brand in app com org; do
-  for frame in core docs help info news; do
+  for frame in docs help info news; do
     origin="http://${frame}.${brand}.localhost:3000"
     check_one "${origin}"
   done

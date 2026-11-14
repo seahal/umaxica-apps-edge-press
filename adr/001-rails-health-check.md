@@ -4,6 +4,10 @@
 
 > **Historical record. Do not follow this document.**
 >
+> The Apex health-page proposal moved to `umaxica-apps-edge-zenith`. Press's
+> current Rails Health API consumer is recorded in [ADR 016](016-rails-machine-health-api.md).
+> The old `vp` mention below predates the Vite+ CLI setup now used in Press.
+>
 > Everything below describes a design that no longer exists: `RAILS_API_URL` is
 > not defined anywhere in the repository, `shared/apex/` was removed and a
 > `shared/` directory is now forbidden by `CLAUDE.md`, and the `vp` CLI

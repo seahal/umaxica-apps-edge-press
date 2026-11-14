@@ -1,5 +1,7 @@
 # ADR 018: The three Cores reach Rails over the public internet, not Workers VPC
 
+> Superseded: moved to `umaxica-apps-edge-sphere` with the Core units.
+
 ## Status
 
 Accepted — 2026-09-11. Supersedes ADR 005 and ADR 006 **for `{app,com,org}/core`

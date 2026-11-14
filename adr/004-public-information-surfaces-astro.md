@@ -2,6 +2,10 @@
 
 ## Status: Rejected 2026-08-12 — the twelve content frames stay Next.js
 
+> Historical status only. The active Press runtime is TanStack Start on Vite;
+> ADR 015 preserves the later Astro proposal and ADR 019 records the current
+> Press boundaries.
+
 **This plan is discarded. Do not implement it.** `docs`, `news`, `info` and
 `help` remain Next.js on OpenNext across all three families, as they are today.
 

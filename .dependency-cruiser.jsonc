@@ -18,7 +18,7 @@
 // for the condition under which this file should grow.
 //
 // The JavaScript graph is small and fully enumerated: tools/*.mjs plus the
-// twenty per-unit api/run.mjs Hurl runners. scripts/ is deliberately absent —
+// twelve per-unit api/run.mjs Hurl runners. scripts/ is deliberately absent —
 // every file there is `#!/usr/bin/env bash`, which no JS parser reads.
 {
   "forbidden": [
@@ -72,14 +72,14 @@
     },
     {
       "name": "tools-lib-is-a-leaf",
-      "comment": "tools/lib/ is the shared implementation layer (wrangler-config.mjs), consumed by the tools/*.mjs entrypoints. It must not reach back up into an entrypoint — that is the cycle-in-waiting this layering exists to prevent, and it is the only local edge in the whole JavaScript graph.",
+      "comment": "tools/lib/ is the shared implementation layer, consumed by tools/*.mjs entrypoints. It must not reach back up into an entrypoint — that is the cycle-in-waiting this layering exists to prevent.",
       "severity": "error",
       "from": { "path": "^tools/lib/" },
       "to": { "path": "^tools/(?!lib/)" }
     },
     {
       "name": "api-runner-is-self-contained",
-      "comment": "Each unit's api/run.mjs spawns that unit's dev server, runs Hurl and stops it. All twenty are node:-builtins-only today, and that is what lets a unit be extracted into its own repository with its HTTP-contract suite intact. Any non-core import here — a shared helper, a sibling unit, an npm package — breaks that promise, so it fails rather than being discovered during an extraction.",
+      "comment": "Each unit's api/run.mjs spawns that unit's dev server, runs Hurl and stops it. All twelve are node:-builtins-only today, and that is what lets a unit be extracted into its own repository with its HTTP-contract suite intact. Any non-core import here — a shared helper, a sibling unit, an npm package — breaks that promise, so it fails rather than being discovered during an extraction.",
       "severity": "error",
       "from": { "path": "api/run\\.mjs$" },
       "to": { "dependencyTypesNot": ["core"] }

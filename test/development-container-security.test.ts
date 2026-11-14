@@ -32,7 +32,7 @@ function trackedUnder(prefix: string): string[] {
 
 /**
  * Every compose file this repository tracks. `compose.yaml` carries the shared
- * services and, behind the `app` profile, the twenty dev servers;
+ * services and, behind the `app` profile, the twelve dev servers;
  * `.devcontainer/compose.yaml` carries `core`, the workspace container, which
  * lives there so a bare `podman compose up` does not start it. Between them they
  * hold the SELinux relabel opt-out and the forwarded `GH_TOKEN`.
@@ -359,9 +359,9 @@ describe('development-container security contract', () => {
     expect(containerfile).toContain(`ARG NODE_VERSION=${devEngines.runtime.version}-trixie`);
   });
 
-  it('declares the toolchain versions through devEngines, not the legacy field', () => {
+  it('declares the toolchain versions consistently', () => {
     const rootPackage = JSON.parse(read('package.json'));
-    expect(rootPackage.packageManager).toBeUndefined();
+    expect(rootPackage.packageManager).toBe('pnpm@12.18.0');
     expect(rootPackage.devEngines.packageManager.name).toBe('pnpm');
     // `download` lets pnpm enforce its own pin; `warn` keeps pnpm from
     // fetching a second Node.js runtime into the image's node_modules.

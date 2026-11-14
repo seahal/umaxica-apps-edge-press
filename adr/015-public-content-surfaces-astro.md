@@ -1,13 +1,13 @@
-# ADR 015: The twelve public content surfaces run Astro, partially superseding ADR 013
+# ADR 015: Historical Astro proposal for the twelve public content surfaces
 
-## Status: Accepted 2026-09-02 — framework cutover is in tree. Publishing pages (2026-09-10): Rails-backed Astro SSR over Workers VPC is in all twelve units. Collection pagination (2026-09-10): public `?page=N` is forwarded to Rails Pagy as `GET /api/v0/entries?locale={lang}&page=N`. The earlier cursor/`next_cursor`/`has_more` publishing collection contract is superseded for these surfaces. Remaining work: `plans/astro-content-surfaces-remaining.md` (Content Collections, ETag/304, three-stream sitemap, Phase 2 cache).
+## Status: Superseded for Press on 2026-09-15 by ADR 019; retained as historical evidence.
 
 > **Current-state amendment (2026-09-15).** This ADR preserves the historical
 > Astro proposal and its evidence. The active tree classifies the twelve public
 > cells as TanStack Start/Vite (`railsBackedVpcVite`); ADR 019 is the current
 > record for their transport, timeout, body, Cookie, logging and offline
-> boundaries. The locale, authentication and SEO decisions in the active plan
-> are not inferred from this historical record.
+> boundaries. The remaining Astro migration plans were removed during the
+> repository split. Current behavior is described by the Press docs and source.
 
 `{app,com,org}/{docs,help,info,news}` — twelve deployment units — move from
 TanStack Start to **Astro on Cloudflare Workers**, `output: 'static'` with a
@@ -293,11 +293,10 @@ module from document fetch even though both use the VPC binding.
 
 - **Phase 0 (done)** — twelve units Astro-only. Cores TanStack. Apex Hono.
   Language prefixes `/ja/` `/en/`. Region is `PUBLIC_REGION`, not a path.
-- **Phase 3 (not done)** — document CMS: Content Collections, DocumentShell,
-  Rails document SSR (fixtures until Rails exists), HTTP lifecycle including
-  410, HTML ETag / Last-Modified / 304, three sitemaps, robots → sitemap-index,
-  document-fetch log, on-demand CSP builder. **Plan:
-  `plans/astro-content-surfaces-remaining.md`.** Start at `app/docs` only.
+- **Phase 3 (not done at the time)** — document CMS: Content Collections,
+  DocumentShell, Rails document SSR, HTTP lifecycle including 410, HTML ETag /
+  Last-Modified / 304, three sitemaps, robots → sitemap-index, document-fetch
+  log, on-demand CSP builder. Its follow-up plan was retired during the split.
 - **Phase 4 (not done)** — Workers Cache after Phase 3 is proven.
 - **Ops (not done)** — production deploy; live VPC against Rails.
 
@@ -305,9 +304,8 @@ Cloudflare Dashboard resources were not touched. No deploy was run.
 
 ## Outcome
 
-**Accepted for the framework decision and the twelve-unit Astro cutover.** The
-document-SSR layer is designed here and scheduled in
-`plans/astro-content-surfaces-remaining.md`; it is pending the Rails public
-read contract and must not invent that contract. Proceed to production only
+**Accepted for the historical framework decision and the twelve-unit Astro cutover.** The
+document-SSR layer was specified here; its follow-up plan was retired during
+the split. Proceed to production only
 with an explicit deploy authorisation and a live Rails path, per `adr/013`'s
 "do not deploy on this evidence alone."

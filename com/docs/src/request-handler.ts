@@ -44,8 +44,7 @@ import { createNonce, runWithNonce } from './security-nonce';
  *    429 on one of them is indistinguishable from a dead isolate.
  *    `/health` and `/health/readinesses` are NOT exempt: both reach Rails, and
  *    an uncounted path into Rails is what the limiter exists to prevent. The
- *    same three paths are the exempt set in every Core `src/worker.ts` and
- *    every apex `create-apex-app.ts`.
+ *    the same three paths are the exempt set in every Press cell.
  * 2. The application response gets one 3-second budget. Its signal is passed
  *    to the bounded body reader so a timeout does not leave that reader alive.
  * 3. One CSP nonce per production request, published to `getRouter()` so

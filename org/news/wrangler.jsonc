@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "umaxica-apps-edge-org-news",
+  "name": "umaxica-apps-edge-press-news-org",
   "workers_dev": true,
   "compatibility_date": "2026-10-06",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -9,9 +9,9 @@
   },
   // TanStack Start's server entry, wrapped by `src/request-handler.ts`.
   "main": "./src/server.ts",
-  // No `directory` and no `binding`: this is the INPUT config, and `vite build`
+  // No `directory` and no `binding`: this is the INPUT config, and `vp build`
   // writes an output wrangler.json whose `assets.directory` points at the client
-  // build. See adr/012-apex-vite-build-and-static-assets.md.
+  // build. See adr/013-frames-tanstack-start.md.
   //
   // Nothing reads an ASSETS binding: assets are matched by Cloudflare BEFORE the
   // Worker runs, so the Worker never has to serve one itself.
@@ -100,7 +100,7 @@
     //
     // Wrangler treats a VPC Service as a resource with no local simulator, so any
     // environment that names one forces a remote proxy session, and that session
-    // needs an interactive `wrangler login` rather than an API token. `vite dev`
+    // needs an interactive `wrangler login` rather than an API token. `vp dev`
     // runs the Worker in workerd, so it would open one — which is why this tier
     // exists rather than reusing `development`.
     //

@@ -5,7 +5,7 @@
  * the application produces and nothing else — Cloudflare
  * matches static assets BEFORE the Worker runs, so files under `public/` never
  * reach this code and take their headers from `public/_headers` instead. That
- * split is the same one the apex Workers already live with, and `public/_headers`
+ * split is the response and static-asset boundary for this unit, and `public/_headers`
  * carries its own `nosniff`/`X-Frame-Options` pair for exactly that reason.
  *
  * `vite dev` is the only server that needs a looser policy. The dev bundle and

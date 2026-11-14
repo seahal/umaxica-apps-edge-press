@@ -1,5 +1,7 @@
 # ADR 007: Shared-FQDN Core dispatch (`worker.ts` as first-touch entry)
 
+> Superseded: moved to `umaxica-apps-edge-sphere` with the Core units.
+
 ## Status: Implemented
 
 ## Context

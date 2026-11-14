@@ -2,6 +2,11 @@
 
 ## Status: Implemented — decision 3 amended by [ADR 016](016-rails-machine-health-api.md)
 
+> Current Press scope: the public-cell Health API consumer remains active.
+> Core dispatch material moved to `umaxica-apps-edge-sphere`, and Apex units
+> moved to `umaxica-apps-edge-zenith`; references to those units below are
+> retained as history.
+
 Edge still owns a single public `/health` entry point (this record). The Rails
 upstream path is no longer `/health/liveness.json`; it is
 `GET /api/v0/health.json`. Historical measurements below are unchanged.

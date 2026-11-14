@@ -2,8 +2,8 @@
 #
 # This is the one configuration file in this repository that is deliberately
 # repository-wide rather than per deployment unit. A dictionary is a shared
-# vocabulary by definition: seventeen units spelling "umaxica" twenty
-# different ways is the failure this prevents, and a per-unit copy could not
+# vocabulary by definition: twelve units spelling "umaxica" differently is
+# the failure this prevents, and a per-unit copy could not
 # see the ADRs, the docs/ tree or the root tooling at all.
 #
 # The rule for a new word: if it is a real misspelling, fix the source. If it is
@@ -67,6 +67,6 @@ dictionaries:
   - fullstack
 
 # Identifiers routinely concatenate words without separators, and CSpell's
-# compound handling is what keeps `apexApp` or `railsDispatchLog` from being
+# compound handling is what keeps `publishingCell` or `railsClient` from being
 # reported as unknown words rather than as two known ones.
 allowCompoundWords: true

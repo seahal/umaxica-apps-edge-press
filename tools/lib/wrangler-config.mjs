@@ -1,7 +1,7 @@
 // Shared reading of `wrangler.jsonc` and `tools/workers-manifest.json`.
 //
-// Extracted from tools/check-workers.mjs so that tools/verify-edge-connectivity.mjs
-// parses wrangler configuration the same way rather than grepping for strings.
+// Shared by tools/check-workers.mjs and its invariant checks, so they parse
+// Wrangler configuration rather than grepping for strings.
 // `wrangler.jsonc` carries comments and trailing commas, so `JSON.parse` alone
 // rejects valid files.
 
