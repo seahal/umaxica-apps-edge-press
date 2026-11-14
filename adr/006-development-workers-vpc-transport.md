@@ -4,8 +4,9 @@
 
 > Scope after the split: Press retains the VPC binding across its twelve public
 > cells. The standalone `tools/vpc-probe` moved to `umaxica-apps-edge-sphere`;
-> probe commands and pre-split unit counts below are historical for this repo.
-> The current per-cell local entrypoint is `dev:vpc`.
+> the old `preview:vpc` examples, probe commands and pre-split unit counts below
+> are historical for this repo. The current per-cell local entrypoint is
+> `dev:vpc`.
 
 > **AMENDED 2026-09-05 — the resource identifiers below are historical.** The
 > account no longer holds "exactly one VPC Service", and the one named
@@ -189,7 +190,7 @@ token, `preview:vpc` cannot (see Outcome). Run it with the token blanked so the
 `.env` copy does not leak back in:
 
 ```bash
-CLOUDFLARE_API_TOKEN= pnpm --filter umaxica-apps-edge-app-docs run preview:vpc
+CLOUDFLARE_API_TOKEN= pnpm --filter umaxica-apps-edge-press-docs-app run preview:vpc
 ```
 
 The credential cost falls only on the third, which is named for what it opts
@@ -201,7 +202,7 @@ concurrent preview servers would each open their own remote-proxy session
 against Cloudflare. Run it one workspace at a time:
 
 ```bash
-pnpm --filter umaxica-apps-edge-app-docs run preview:vpc
+pnpm --filter umaxica-apps-edge-press-docs-app run preview:vpc
 ```
 
 ### 4. No path prefix — ADR 005 decision 3 is retracted
@@ -349,7 +350,7 @@ No application code changed: no `src/lib/rails-client.ts`, no
 repository has reached Rails, over any transport.
 
 ```
-$ CLOUDFLARE_API_TOKEN= pnpm --filter umaxica-apps-edge-app-docs run preview:vpc
+$ CLOUDFLARE_API_TOKEN= pnpm --filter umaxica-apps-edge-press-docs-app run preview:vpc
 env.UMAXICA_APPS_EDGE_CF_WORKERS_VPC (019f5fe0-…)   VPC Service   remote
 Ready on http://localhost:8787
 

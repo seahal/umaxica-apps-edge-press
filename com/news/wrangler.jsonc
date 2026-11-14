@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "umaxica-apps-edge-com-news",
+  "name": "umaxica-apps-edge-press-news-com",
   "workers_dev": true,
   "compatibility_date": "2026-10-06",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
