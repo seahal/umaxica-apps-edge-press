@@ -28,3 +28,15 @@ Repository: `wrangler.jsonc` and `package.json` names, root `--filter` scripts,
 
 Preview: `pnpm run deploy:edge:preview -- <unit>` (no `--bootstrap-missing`)
 exited 0 for all twelve units. Production promotion was not run.
+
+## Workers Builds repository switch
+
+Through the Cloudflare API MCP server (scope `workers-ci.write`), registered
+repository connection `98dcd1c6-bb90-427e-a5d9-273addb627fb` for
+`seahal/umaxica-apps-edge-press` (GitHub repo ID `1455489610`). All 24 triggers
+(two per Worker) previously pointed at `seahal/umaxica-apps-edge` (repo ID
+`838495664`). The API cannot change a trigger's repository and limits each Worker
+to two triggers, so each trigger was deleted and recreated with the same name,
+build token, branch filters, root directory, and deploy command. A read-back
+showed all twelve Workers with a `main` trigger running `deploy` and a `*`
+trigger running `deploy:upload`, both on the new repository.
