@@ -32,7 +32,7 @@
 # `compose.yaml` の `name:` と必ず一致させること。Compose はプロジェクト名を
 # 「最後に name: を設定したファイル」から取るため、違う値を書くとプロジェクトが
 # 分裂し、コンテナと volume の組がもう 1 セット出来てしまう。
-name: umaxica-apps-edge
+name: umaxica-apps-edge-press
 
 services:
   core:

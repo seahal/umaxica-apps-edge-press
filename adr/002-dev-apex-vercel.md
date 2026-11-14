@@ -2,6 +2,8 @@
 
 ## Status: Superseded 2026-08-19 by [ADR 012](012-apex-vite-build-and-static-assets.md)
 
+> Superseded: moved to `umaxica-apps-edge-zenith` with the Apex units.
+
 **`dev/apex` no longer runs on Vercel.** It deploys to Cloudflare Workers on
 the shared apex archetype, and the Vercel surface this record describes —
 `vercel.json`, `api/index.ts` and `hono/vercel`'s `handle` — has been deleted.

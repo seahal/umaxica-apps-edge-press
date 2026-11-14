@@ -1,6 +1,8 @@
 # ADR 014: Edge owns its development Tunnel
 
-> Superseded for app/com/org apex only by [ADR 024](024-retire-app-com-org-apex-units.md). The record below is unchanged history.
+> Scope after the split: this copy covers the Press development tunnel. Apex
+> host material moved to `umaxica-apps-edge-zenith`; Core host material moved
+> to `umaxica-apps-edge-sphere`.
 
 ## Status: Accepted (amended 2026-09-04 — fallback withdrawn, token variable renamed)
 

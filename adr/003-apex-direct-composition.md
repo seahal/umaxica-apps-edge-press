@@ -2,6 +2,8 @@
 
 > Superseded for app/com/org apex only by [ADR 024](024-retire-app-com-org-apex-units.md). The record below is unchanged history.
 
+> Superseded: moved to `umaxica-apps-edge-zenith` with the Apex units.
+
 ## Status: Completed
 
 ## GitHub Issue

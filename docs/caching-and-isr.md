@@ -1,8 +1,8 @@
 # 公開系 surface のキャッシュ方針
 
 > **2026-09-15 更新.** `adr/015-public-content-surfaces-astro.md` のAstro移行記述は
-> 歴史として残る。現在の公開系12面はTanStack Start/Viteで、Cache APIの新規Hono
-> HTML層は導入しない。既存の公開Entry detailだけがコード上の短い明示cache policyを
+> 歴史として残る。現在の公開系12面はTanStack Start/Viteで、独自のHTML
+> キャッシュ層は導入しない。既存の公開Entry detailだけがコード上の短い明示cache policyを
 > 持ち、collection、検索、失敗文書、機械向け応答は保存しない。方針の境界は
 > `adr/019-edge-parallel-contract-boundaries.md` と各unitの `cache-policy.ts` にある。
 
@@ -45,7 +45,7 @@
 
 12 の公開系 surface は `/{lang}/entries/` を毎リクエスト Rails SSR する。Entry detail
 だけは `src/lib/cache-policy.ts` の60秒policyを、成功したpublic文書に限って付ける。
-application cache / 新規Hono HTML cache / ISRの一般化は行わない。将来のcache層は
+application cache / 独自のWorker HTML cache / ISRの一般化は行わない。将来のcache層は
 correctness確認後の別作業であり、選択肢は:
 
 - **HTTP キャッシュ**(`Cache-Control: s-maxage` + Cloudflare の edge cache、
@@ -64,8 +64,7 @@ correctness確認後の別作業であり、選択肢は:
 
 - binding 名は `UMAXICA_APPS_EDGE_CF_WORKERS_VPC` を維持する。
 - binding は capability であり、Rails を fetch しない worker には付与しない。
-  5 つの apex Worker は `standalone` のままで、binding を持たない。
-- 15 フレームは `railsBackedVite` または `railsBackedVpcVite` で、binding を持っている。
+- 十二の Press cell は `railsBackedVpcVite` で、binding を持っている。
   公開系 12 surface は `/health` とPublishing readで既存のVPC clientを使い、Entry detail
   の成功文書だけにunit内の60秒cache policyを適用する。失敗文書とcollectionは保存しない。
 - 分類と wrangler 設定の整合は `pnpm run check:workers`(CI の `check-workers`

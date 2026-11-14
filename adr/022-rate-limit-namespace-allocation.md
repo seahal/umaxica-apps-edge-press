@@ -1,6 +1,8 @@
 # ADR 022: Rate-limit namespaces are per FQDN, with a region suffix
 
-> Superseded for app/com/org apex only by [ADR 024](024-retire-app-com-org-apex-units.md). The record below is unchanged history.
+> Scope after the split: this allocation applies to Press's twelve public
+> cells. Apex allocations moved to `umaxica-apps-edge-zenith`; Core allocations
+> moved to `umaxica-apps-edge-sphere`.
 
 ## Status
 

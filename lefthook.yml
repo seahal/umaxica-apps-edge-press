@@ -3,11 +3,11 @@ pre-commit:
   commands:
     format:
       glob: '*.{js,jsx,ts,tsx,json,jsonc,yaml,yml,md,mdx}'
-      run: pnpm exec oxfmt {staged_files}
+      run: pnpm exec vp fmt {staged_files} --write
       stage_fixed: true
     lint:
       glob: '*.{js,jsx,ts,tsx}'
-      run: pnpm exec oxlint {staged_files}
+      run: pnpm exec vp lint {staged_files}
     # Scoped to what is being committed, like format and lint above: a
     # dictionary miss is a one-word fix and finding it here costs a second,
     # while finding it in CI costs a round trip. `--no-must-find-files` keeps
@@ -23,12 +23,12 @@ pre-commit:
       run: pnpm run check:deps
 
 # Both hooks stay deliberately thin and root-owned. Each deployment unit now
-# carries the same `lint` / `lint:types` / `format:check` / `typecheck` / `test`
+# carries the same `lint` / `lint:check` / `format:check` / `typecheck` / `test`
 # scripts, so when a unit is extracted this file can be copied into the new
 # repository unchanged — the commands it calls already exist there.
 #
-# `pre-commit` runs oxlint WITHOUT `--type-aware` on purpose: the type-aware
-# pass needs a whole program per unit and is measured at ~4s for the tree, which
+# `pre-commit` runs vp lint WITHOUT `--type-aware` on purpose: the type-aware
+# pass needs a whole program per unit, which
 # is a pre-push cost, not a per-commit one. `pre-push` and CI both run it.
 #
 # `pre-push` runs sequentially, CHEAPEST FIRST, and `piped: true` is what makes
@@ -40,9 +40,9 @@ pre-commit:
 #
 #   check:deps          0.35s
 #   check:architecture  0.55s
-#   knip                1.19s   (all twenty-one units, --workspace-concurrency=1)
+#   knip                1.19s   (all twelve units, --workspace-concurrency=1)
 #   check:spelling      17.35s  (1637 files)
-#   lint:types / typecheck / test — the pre-existing, much larger costs
+#   lint:check / typecheck / test — the pre-existing, much larger costs
 #
 # `parallel: true` was considered and not taken; it is also mutually exclusive
 # with `piped`. These commands are all read-only, so running them together would
@@ -51,10 +51,10 @@ pre-commit:
 # overlap, because the two slowest commands are the two least likely to fail.
 #
 # `check:size` is deliberately absent. It measures build OUTPUT, so it would
-# require building all seventeen units before every push. That cost belongs in
+# require building all twelve units before every push. That cost belongs in
 # CI, where the build matrix already exists and the measurement is free.
 # `priority` is not decoration. Lefthook orders commands ALPHABETICALLY unless
-# one is set, which put `lint-types` ahead of `spelling` here purely because "l"
+# one is set, which put `lint-check` ahead of `spelling` here purely because "l"
 # sorts before "s" — measured, not assumed. The numbers below are the measured
 # cost order and have to stay in step with it.
 pre-push:
@@ -78,10 +78,10 @@ pre-push:
     spelling:
       priority: 4
       run: pnpm run check:spelling
-    # The pre-existing gates, unchanged and last.
-    lint-types:
+    # The read-only lint gate, followed by the slower type and test suites.
+    lint-check:
       priority: 5
-      run: pnpm run lint:types
+      run: pnpm run lint:check
     typecheck:
       priority: 6
       run: pnpm run typecheck

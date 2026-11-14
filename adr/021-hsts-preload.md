@@ -1,5 +1,9 @@
 # ADR 021: HSTS with preload on every Edge response
 
+> Current Press scope: this contract applies to the twelve Press Workers.
+> Apex and Core references below describe the former combined estate and are
+> not operational instructions for their new repositories.
+
 ## Status
 
 Accepted — 2026-09-19. Approved by the repository owner.

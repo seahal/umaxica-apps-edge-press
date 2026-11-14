@@ -1,5 +1,9 @@
 # ADR 019: Edge boundaries that can ship beside the Rails rewrite
 
+> Scope after the split: only the twelve public content cells remain in Press.
+> Core sections below moved to `umaxica-apps-edge-sphere`; Apex sections moved
+> to `umaxica-apps-edge-zenith`. Those sections are retained as decision history.
+
 > 2026-10-11 amendment: Core no longer reads the Preference `language` Cookie.
 > Display locale (including 429) uses the last scalar `lx` URL parameter,
 > lowercased and validated, or the existing `ja` default. The twelve public
@@ -31,11 +35,9 @@ remain outside this work. The Edge work needs explicit boundaries that can be
 tested with local fixtures and fake bindings without weakening authentication or
 changing Rails.
 
-The implementation plan and its baseline are in
-[`plans/edge-parallel-contracts-2026-09.md`](../plans/edge-parallel-contracts-2026-09.md).
-The plan's P0 review approved only work that is independent of Rails or has a
-fixed, inspected contract, and keeps every deployment unit's local configuration
-boundary.
+The implementation and its baseline were reviewed as an independent workstream.
+The former task plan was removed during the repository split; the accepted
+runtime boundaries below remain the decision record.
 
 ## Decision
 

@@ -22,10 +22,9 @@ if [[ -n "$bootstrap_option" && "$bootstrap_option" != '--bootstrap-missing' ]];
 fi
 
 case "$worker_directory" in
-  app/apex | app/core | app/docs | app/help | app/info | app/news | \
-    com/apex | com/core | com/docs | com/help | com/info | com/news | \
-    org/apex | org/core | org/docs | org/help | org/info | org/news | \
-    net/apex) ;;
+  app/docs | app/help | app/info | app/news | \
+    com/docs | com/help | com/info | com/news | \
+    org/docs | org/help | org/info | org/news) ;;
   *)
     echo "Unknown Edge Worker directory: $worker_directory" >&2
     exit 64

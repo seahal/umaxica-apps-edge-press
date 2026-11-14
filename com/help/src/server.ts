@@ -18,9 +18,8 @@ import './security-nonce-als';
  * percent-encoding (`/%E0%A4%A`) with a bare 400 before calling `fetch`, so
  * that 400 skipped `handleRequest` and left without security headers,
  * `X-Request-Id` or a completion log. With a plain entry the same 400 comes
- * from `createStartHandler`, inside `handleRequest`. The three Cores have the
- * same shape (`src/lib/app-handler.ts` in each); `api/malformed-path.hurl` pins
- * the result.
+ * from `createStartHandler`, inside `handleRequest`. Each standalone Press cell
+ * keeps its own copy of this boundary; `api/malformed-path.hurl` pins the result.
  *
  * `defaultRenderHandler`, NOT `defaultStreamHandler`, and the choice is
  * load-bearing: streaming flushes the shell before a failure is known, which

@@ -52,7 +52,7 @@ printf '%s\n' "${ssh_greeting}"
 remote_url=$(git remote get-url origin)
 if [[ ${remote_url} != git@github.com:* && ${remote_url} != ssh://git@github.com/* ]]; then
   echo "BLOCKED: origin is not an SSH remote: ${remote_url}" >&2
-  echo '  git remote set-url origin git@github.com:seahal/umaxica-apps-edge.git' >&2
+  echo '  git remote set-url origin git@github.com:seahal/umaxica-apps-edge-press.git' >&2
   exit 2
 fi
 git ls-remote "${remote_url}" HEAD >/dev/null

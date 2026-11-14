@@ -1,8 +1,8 @@
 # キーボード操作の準拠方針
 
 **位置づけ：規範。**
-UMAXICA Edge の UI は、[Apple Human Interface Guidelines の Keyboards](https://developer.apple.com/design/human-interface-guidelines/keyboards) に準拠して設計、実装、レビューする。
-対象は、このリポジトリが HTML を生成するすべての deployment unit とする。
+UMAXICA Press の UI は、[Apple Human Interface Guidelines の Keyboards](https://developer.apple.com/design/human-interface-guidelines/keyboards) に沿って設計、実装、レビューする。
+対象は十二の公開 content cell `{app,com,org}/{docs,help,info,news}` とする。
 本書は今後の変更に適用する方針であり、既存 UI の準拠確認が完了したことを示すものではない。
 
 ## Apple の指針の適用

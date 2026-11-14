@@ -2,6 +2,11 @@
 
 ## Status: Implemented and verified end to end
 
+> Scope after the split: Press retains the VPC binding across its twelve public
+> cells. The standalone `tools/vpc-probe` moved to `umaxica-apps-edge-sphere`;
+> probe commands and pre-split unit counts below are historical for this repo.
+> The current per-cell local entrypoint is `dev:vpc`.
+
 > **AMENDED 2026-09-05 — the resource identifiers below are historical.** The
 > account no longer holds "exactly one VPC Service", and the one named
 > throughout this record has been retired from configuration:

@@ -11,9 +11,9 @@ const repoRoot = join(import.meta.dirname, '..');
  * invariant. Neither of the two obvious homes can hold it:
  *
  * - `.oxlintrc.json` matches import SPECIFIER text, so it cannot tell
- *   `app/core -> app/docs` (written `../../../docs/...`) from a legitimate
- *   within-unit `src/app/docs/...` reference. Unit names — core, docs, info,
- *   news, help — are ordinary directory names inside a unit, so any pattern
+ *   `app/docs -> com/docs` from a legitimate
+ *   within-unit `src/app/docs/...` reference. Surface names such as docs, info,
+ *   news, and help are ordinary directory names inside a unit, so any pattern
  *   broad enough to catch the first also rejects the second.
  * - `.dependency-cruiser.cjs` COULD express it exactly, on resolved paths with
  *   backreferences, but depcruise needs TypeScript's programmatic API and
@@ -147,11 +147,13 @@ function staticPathTarget(args: string[], file: string, unit: string): string | 
 describe('deployment unit boundaries', () => {
   it('reads a plausible set of units from pnpm-workspace.yaml', () => {
     // Everything below is only as strong as this list. If the parse silently
-    // returned nothing, every assertion would vacuously pass.
-    expect(units.length).toBeGreaterThanOrEqual(20);
-    expect(units).toContain('app/core');
-    expect(units).toContain('net/apex');
-    expect(units).toContain('dev/apex');
+    // returned nothing, every assertion would vacuously pass. This repository
+    // owns exactly the twelve public content cells.
+    expect(units).toEqual(
+      ['app', 'com', 'org'].flatMap((brand) =>
+        ['docs', 'help', 'info', 'news'].map((surface) => `${brand}/${surface}`),
+      ),
+    );
   });
 
   it('finds source files to check', () => {
@@ -350,6 +352,7 @@ describe('deployment unit boundaries', () => {
     // Binary name -> the package that provides it, where they differ.
     const provider: Record<string, string> = {
       tsc: 'typescript',
+      vp: 'vite-plus',
       playwright: '@playwright/test',
       vitest: 'vitest',
       // Hurl is a Rust binary; `@orangeopensource/hurl` is its npm distribution

@@ -1,5 +1,5 @@
 {
-  "name": "umaxica-apps-edge",
+  "name": "umaxica-apps-edge-press",
   // Two TRACKED files, both required on a fresh `git clone`: `../compose.yaml`
   // carries the shared services, and `./compose.yaml` defines `core`, the
   // workspace container. `core` lives there rather than in `../compose.yaml`
@@ -55,22 +55,11 @@
   // 8976 is the `wrangler login` browser OAuth callback. Cloudflare access is
   // now obtained interactively inside the container instead of through a
   // mounted API token, so the callback belongs to the base environment.
-  "forwardPorts": [
-    5101, 5103, 5105, 5106, 5107, 5108, 5201, 5301, 5303, 5305, 5306, 5307, 5308, 5401, 5403, 5405,
-    5406, 5407, 5408, 5501, 8976
-  ],
+  "forwardPorts": [5103, 5106, 5107, 5108, 5303, 5306, 5307, 5308, 5403, 5406, 5407, 5408, 8976],
   "portsAttributes": {
-    "5101": {
-      "label": "com/apex",
-      "onAutoForward": "notify"
-    },
     "5103": {
       "label": "com/info",
       "onAutoForward": "silent"
-    },
-    "5105": {
-      "label": "com/core",
-      "onAutoForward": "notify"
     },
     "5106": {
       "label": "com/docs",
@@ -84,21 +73,9 @@
       "label": "com/help",
       "onAutoForward": "silent"
     },
-    "5201": {
-      "label": "net/apex",
-      "onAutoForward": "notify"
-    },
-    "5301": {
-      "label": "org/apex",
-      "onAutoForward": "notify"
-    },
     "5303": {
       "label": "org/info",
       "onAutoForward": "silent"
-    },
-    "5305": {
-      "label": "org/core",
-      "onAutoForward": "notify"
     },
     "5306": {
       "label": "org/docs",
@@ -112,17 +89,9 @@
       "label": "org/help",
       "onAutoForward": "silent"
     },
-    "5401": {
-      "label": "app/apex",
-      "onAutoForward": "notify"
-    },
     "5403": {
       "label": "app/info",
       "onAutoForward": "silent"
-    },
-    "5405": {
-      "label": "app/core",
-      "onAutoForward": "notify"
     },
     "5406": {
       "label": "app/docs",
@@ -134,10 +103,6 @@
     },
     "5408": {
       "label": "app/help",
-      "onAutoForward": "silent"
-    },
-    "5501": {
-      "label": "dev/apex",
       "onAutoForward": "silent"
     }
   },

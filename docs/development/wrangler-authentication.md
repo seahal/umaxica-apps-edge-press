@@ -3,9 +3,8 @@
 Wrangler holds **dedicated container OAuth state, never an API token**. This is not a
 preference: an API token cannot open a remote-binding session at all. The edge-preview
 endpoint answers `10405 Method not allowed for this authentication scheme`, so
-`--env vpc` — the only path that reaches Rails over the VPC binding — is unavailable
-without an OAuth session. `tools/vpc-probe/empty.env` exists to keep a stray
-`CLOUDFLARE_API_TOKEN` out of the way for exactly this reason.
+`dev:vpc` — the local development path that reaches Rails over the VPC binding —
+is unavailable without an OAuth session.
 
 ## The default is `pnpm run login`
 
@@ -38,7 +37,7 @@ From outside the container, the same thing without entering it first:
 
 ```bash
 podman exec -it -w /home/edge/workspace \
-  umaxica-apps-edge-core-1 \
+  umaxica-apps-edge-press-core-1 \
   pnpm run login:device
 ```
 
@@ -85,10 +84,11 @@ while signed into the wrong Cloudflare account produces a perfectly valid token 
 wrong tenant, and nothing downstream will flag it. `connectivity (admin)` must appear in
 the scope list; it is what grants access to the VPC Service.
 
-Then exercise the transport itself:
+To exercise the binding from a kept surface, start its VPC-backed development
+server and make a request through it:
 
 ```bash
-pnpm run check:vpc
+pnpm --dir app/docs run dev:vpc
 ```
 
 ## Where the token lives
@@ -98,19 +98,8 @@ the host holds a copy and nothing persists it: the container obtains the session
 interactively rather than receiving it, and recreating the container means logging in
 again — see [credential-and-secret-management.md](credential-and-secret-management.md).
 
-## Measured, 2026-08-21
+## Previous verification
 
-The device grant completed in a container reached over `podman exec`, with no port
-reachable from the browser. From the Wrangler log of the successful run:
-
-```text
-grant_type=urn:ietf:params:oauth:grant-type:device_code
-https://dash.cloudflare.com/oauth2/device
-https://dash.cloudflare.com/oauth2/token
-```
-
-Three loopback attempts immediately before it reached only
-`https://dash.cloudflare.com/oauth2/auth` and stranded their codes.
-
-`pnpm run check:vpc` then resolved the binding and reached Rails over the VPC Service,
-which is the acceptance this login exists to make possible.
+The device grant and VPC reachability were verified together on 2026-08-21,
+before the repository split. That result records the earlier authentication
+flow; use a kept surface's `dev:vpc` command when checking current local access.

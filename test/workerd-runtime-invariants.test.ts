@@ -20,7 +20,7 @@ const repoRoot = join(import.meta.dirname, '..');
 const read = (relativePath: string) => readFileSync(join(repoRoot, relativePath), 'utf8');
 
 const BRANDS = ['app', 'com', 'org'] as const;
-const FRAMES = ['core', 'docs', 'news', 'help', 'info'] as const;
+const FRAMES = ['docs', 'news', 'help', 'info'] as const;
 
 /*
  * The frames that still build through Next.js. Currently none.
@@ -69,7 +69,7 @@ describe('Next.js options that workerd cannot honour', () => {
        * and then every prerendered (`○`) and PPR (`◐`) route hangs until the
        * runtime cancels the request — HTTP 500, "your Worker's code had hung".
        * Only Route Handlers (`ƒ`) survive, which is why `/health` kept answering
-       * 200 while `/` and `/rails-health` did not, in all fifteen frames.
+       * 200 while `/` and `/rails-health` did not, in all twelve cells.
        *
        * Verified by removing the flag and rebuilding: `/`, `/about` and
        * `/rails-health` went from 500 to 200.

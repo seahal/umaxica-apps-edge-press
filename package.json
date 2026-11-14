@@ -1,26 +1,16 @@
 {
-  "name": "umaxica-app-edge",
+  "name": "umaxica-apps-edge-press",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "format": "pnpm -r run format && oxfmt .",
-    "format:check": "pnpm -r run format:check && oxfmt --check .",
-    "lint": "pnpm -r run lint && oxlint --report-unused-disable-directives .",
+    "format": "pnpm -r run format && vp fmt --config .oxfmtrc.json . --write",
+    "format:check": "pnpm -r run format:check && vp fmt --config .oxfmtrc.json . --check",
+    "lint": "pnpm -r run lint && vp lint --config .oxlintrc.json --type-aware --fix tools test vite.config.ts",
     "check:workers": "node tools/check-workers.mjs",
     "login": "scripts/wrangler-login",
     "login:device": "scripts/wrangler-login --device",
-    "check:connectivity": "node tools/verify-edge-connectivity.mjs all",
-    "check:config": "node tools/verify-edge-connectivity.mjs config",
-    "check:vpc": "node tools/verify-edge-connectivity.mjs vpc",
-    "check:local": "node tools/verify-edge-connectivity.mjs next",
-    "check:preview": "node tools/verify-edge-connectivity.mjs preview",
-    "check:preview:vpc": "node tools/verify-edge-connectivity.mjs preview:vpc",
-    "check:host": "node tools/verify-edge-connectivity.mjs host",
-    "check:tunnel:edge": "node tools/verify-edge-connectivity.mjs tunnel",
-    "check:tunnel:apex": "node tools/verify-edge-connectivity.mjs tunnel:apex",
-    "check:links": "node tools/verify-edge-connectivity.mjs links",
-    "check:architecture": "depcruise --config .dependency-cruiser.jsonc --output-type err-long tools app/*/api com/*/api org/*/api net/*/api dev/*/api",
+    "check:architecture": "depcruise --config .dependency-cruiser.jsonc --output-type err-long tools app/*/api com/*/api org/*/api",
     "check:deps": "syncpack lint",
     "fix:deps": "syncpack fix",
     "check:spelling": "cspell lint --no-progress --gitignore --dot .",
@@ -32,18 +22,20 @@
     "knip": "pnpm -r --workspace-concurrency=1 run knip",
     "typecheck": "pnpm -r run typecheck",
     "test": "pnpm -r --workspace-concurrency=4 run test && pnpm run test:repo",
-    "test:repo": "EDGE_TRACKED_FILES=\"$(git ls-files)\" vitest run --dir test",
+    "test:repo": "EDGE_TRACKED_FILES=\"$(git ls-files)\" vp test run --dir test",
     "test:stress": "pnpm -r --workspace-concurrency=4 run test:stress && pnpm run test:repo:stress",
-    "test:repo:stress": "EDGE_TRACKED_FILES=\"$(git ls-files)\" vitest run --dir test --sequence.shuffle",
+    "test:repo:stress": "EDGE_TRACKED_FILES=\"$(git ls-files)\" vp test run --dir test --sequence.shuffle",
     "test:api": "pnpm -r run test:api",
     "test:e2e": "pnpm -r run test:e2e",
     "prepare": "lefthook install",
     "build": "pnpm -r run build",
     "check": "pnpm run check:static && pnpm run test",
-    "lint:types": "pnpm -r --if-present run cf-typegen && pnpm -r run lint:types && oxlint --type-aware --report-unused-disable-directives .",
-    "lint:fix": "pnpm -r run lint:fix && oxlint --type-aware --fix .",
     "check:generated": "pnpm -r run check:generated",
-    "check:static": "pnpm run format:check && pnpm run lint && pnpm run lint:types && pnpm run check:generated && pnpm run typecheck && pnpm run knip && pnpm run check:workers && pnpm run check:architecture && pnpm run check:deps && pnpm run check:spelling"
+    "check:static": "pnpm run format:check && pnpm run lint:check && pnpm run check:generated && pnpm run typecheck && pnpm run knip && pnpm run check:workers && pnpm run check:architecture && pnpm run check:deps && pnpm run check:spelling",
+    "lint:check": "pnpm -r run lint:check && vp lint --config .oxlintrc.json --type-aware tools test vite.config.ts",
+    "check:local": "scripts/check-local",
+    "check:rails": "scripts/check-rails",
+    "check:tunnel": "scripts/check-tunnel"
   },
   "devDependencies": {
     "@size-limit/file": "catalog:",
@@ -51,30 +43,31 @@
     "@types/node": "catalog:",
     "cspell": "catalog:",
     "dependency-cruiser": "catalog:",
-    "hono": "catalog:",
     "knip": "catalog:",
     "lefthook": "^2.2.2",
-    "oxfmt": "catalog:",
-    "oxlint": "catalog:",
-    "oxlint-tsgolint": "catalog:",
     "size-limit": "catalog:",
     "syncpack": "catalog:",
     "typescript": "catalog:",
+    "vite-plus": "catalog:",
     "vitest": "catalog:",
     "wrangler": "catalog:"
   },
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
-      "version": "12.11.2",
+      "version": "12.18.0",
       "onFail": "download"
     },
     "runtime": {
       "name": "node",
-      "version": "24.21.0",
+      "version": "26.13.1",
       "onFail": "warn"
     }
   },
+  "engines": {
+    "node": "26.13.1"
+  },
+  "packageManager": "pnpm@12.18.0",
   "intent": {
     "skills": [
       "*"

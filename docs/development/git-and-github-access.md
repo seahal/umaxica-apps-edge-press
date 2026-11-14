@@ -1,9 +1,9 @@
 # Git and GitHub access
 
-The authoritative repository is `git@github.com:seahal/umaxica-apps-edge.git`.
+The authoritative repository is `git@github.com:seahal/umaxica-apps-edge-press.git`.
 
 The container reuses the **host's** GitHub identity, borrowed rather than copied. Nothing
-is registered inside `core`, and no key file or token literal exists in this repository or
+is registered inside the workspace container, and no key file or token literal exists in this repository or
 in the image:
 
 | Operation                  | Credential         | How it arrives                                                                                                                           |
@@ -53,7 +53,7 @@ Do not grant `admin:org`, `admin:repo_hook`, `workflow`, or any secret administr
 scope. Bound the agent's reach on the host too: a dedicated agent holding only the GitHub
 key, and `ssh-add -t <seconds>` for a lifetime limit.
 
-## Verifying, inside `core`
+## Verifying, inside the workspace container
 
 ```bash
 scripts/github-readonly-check

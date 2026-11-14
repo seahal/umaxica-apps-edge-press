@@ -105,7 +105,7 @@ describe('Edge-owned tunnel connector', () => {
 
   it('defines one hardened connector without a cross-project network', () => {
     // `core` is the only service in the Dev Container's file, and the connector is
-    // the only service in `compose.yaml` without a profile -- the twenty dev
+    // the only service in `compose.yaml` without a profile -- the twelve dev
     // servers all sit behind `profiles: [app]`, so a bare `podman compose up`
     // starts the connector and nothing else.
     const namesIn = (text: string): string[] => {
@@ -150,7 +150,7 @@ describe('Edge-owned tunnel connector', () => {
     // `compose.yaml` and `scripts/dev-start` — a second volume set, and a port
     // clash with the containers `--remove-existing-container` then fails to
     // find. The example shows the right value.
-    expect(composeOverrideExample).toMatch(/^name: umaxica-apps-edge$/mu);
+    expect(composeOverrideExample).toMatch(/^name: umaxica-apps-edge-press$/mu);
     expect(devcontainer).toContain('"runServices": ["core", "cloudflare-tunnel"]');
   });
 
@@ -231,7 +231,9 @@ describe('secret hygiene', () => {
     const allowedWithValue = new Set<string>();
     const offenders: string[] = [];
 
-    for (const path of trackedFiles().filter((file) => file.endsWith('.env.example'))) {
+    for (const path of trackedFiles().filter(
+      (file) => file.endsWith('.env.example') && existsSync(join(repoRoot, file)),
+    )) {
       for (const line of read(path).split('\n')) {
         const match = /^([A-Z0-9_]+)=(.+)$/u.exec(line.trim());
         if (match && !allowedWithValue.has(match[1] as string)) {
@@ -273,9 +275,7 @@ describe('secret hygiene', () => {
      * credential may be committed to source or to `wrangler.jsonc`.
      */
     const clients = ['app', 'com', 'org'].flatMap((tld) =>
-      ['core', 'docs', 'news', 'help', 'info'].map(
-        (frame) => `${tld}/${frame}/src/lib/rails-client.ts`,
-      ),
+      ['docs', 'news', 'help', 'info'].map((frame) => `${tld}/${frame}/src/lib/rails-client.ts`),
     );
 
     for (const client of clients) {
@@ -304,11 +304,9 @@ describe('secret hygiene', () => {
       const stripIndex = source.indexOf('FORBIDDEN_REQUEST_HEADERS) {');
       expect(stripIndex, `${client} lost the header strip`).toBeGreaterThan(-1);
 
-      // No frame applies a transport credential after the strip: the Cores reach
-      // Rails over the public internet with none at all
-      // (adr/018-core-rails-direct-internet.md) and the public cells through the
-      // Workers VPC binding, which carries none either — so nothing may be added
-      // back.
+      // No Press cell applies a transport credential after the strip. Public
+      // cells reach Rails through the Workers VPC binding, which carries none —
+      // so nothing may be added back.
       expect(source, `${client} must apply no transport credentials`).not.toContain('authHeaders');
     }
   });

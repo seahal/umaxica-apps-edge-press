@@ -52,8 +52,3 @@ browser-facing Base.Org origin (`https://www.umaxica.org/`).
 It is not the VPC binding or a `*.{app,com,org}.localhost` surface host.
 
 Surfaces are `info|docs|news|help`. Audiences are `app|com|org`.
-
-## Operator hub
-
-`org/core` serves `/publishing` as a launcher for the same twelve Rails indexes.
-It is not a CMS.

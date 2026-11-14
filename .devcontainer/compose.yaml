@@ -8,18 +8,17 @@
 #
 # `name:` matches `compose.yaml` on purpose. Compose keys its networks and its
 # named volumes by project name, so the Dev Container, `scripts/dev-start` and a
-# bare `podman compose` still resolve to one set of containers and volumes --
-# the same `pnpm-store`, the same `node-volume`, the same `umaxica-edge-tunnel`.
+# bare `podman compose` still resolve to one set of containers and volumes.
 #
 # Relative paths still resolve against the repository root, not against this
 # directory: Compose resolves them against the project directory, which is the
 # directory holding the FIRST `-f` file, and `devcontainer.json` lists
 # `../compose.yaml` first. This file is therefore not usable on its own.
-name: umaxica-apps-edge
+name: umaxica-apps-edge-press
 
 services:
-  # The workspace container. Every dev server the twenty units define is started
-  # BY HAND inside it, which is why it publishes all twenty ports and parks PID 1
+  # The workspace container. Every dev server the twelve units define is started
+  # BY HAND inside it, which is why it publishes all twelve ports and parks PID 1
   # on `sleep infinity`.
   core:
     build:
@@ -62,26 +61,18 @@ services:
         volume:
           nocopy: true
     ports:
-      - '127.0.0.1:5101:5101' # com/apex
       - '127.0.0.1:5103:5103' # com/info
-      - '127.0.0.1:5105:5105' # com/core
       - '127.0.0.1:5106:5106' # com/docs
       - '127.0.0.1:5107:5107' # com/news
       - '127.0.0.1:5108:5108' # com/help
-      - '127.0.0.1:5201:5201' # net/apex
-      - '127.0.0.1:5301:5301' # org/apex
       - '127.0.0.1:5303:5303' # org/info
-      - '127.0.0.1:5305:5305' # org/core
       - '127.0.0.1:5306:5306' # org/docs
       - '127.0.0.1:5307:5307' # org/news
       - '127.0.0.1:5308:5308' # org/help
-      - '127.0.0.1:5401:5401' # app/apex
       - '127.0.0.1:5403:5403' # app/info
-      - '127.0.0.1:5405:5405' # app/core
       - '127.0.0.1:5406:5406' # app/docs
       - '127.0.0.1:5407:5407' # app/news
       - '127.0.0.1:5408:5408' # app/help
-      - '127.0.0.1:5501:5501' # dev/apex
       # Browser OAuth callback for `wrangler login`. Cloudflare credentials are
       # now obtained interactively inside the container instead of being
       # injected as a long-lived API token, so this port is part of the base
@@ -116,24 +107,15 @@ services:
       # `compose config` ごと止まる。gh は空文字を「未設定」として扱い
       # hosts.yml へフォールバックするので、空のまま渡して無害。
       GH_TOKEN: ${GH_TOKEN:-}
-      # Read only by `tools/verify-edge-connectivity.mjs` as an "am I inside the
-      # container" hint, alongside its `/.dockerenv` fallback. It is a property of
-      # this service rather than of the editor attached to it, so it belongs here
-      # rather than in an overlay only VS Code loads.
-      DEVCONTAINER: '1'
     # `default` is written out rather than left implicit: a service-level
     # `networks:` list REPLACES the implicit membership instead of merging with
     # it, so omitting it would detach `core` from this project's own network.
     #
-    # `edge.localhost` is the address the Global/Rails Cloudflare Tunnel
-    # connector names in its ingress rules, and it has to be unambiguous. Podman
-    # registers the service name as an alias on every network a container joins,
-    # so a rule naming `core` would resolve on this network AND on Global's
-    # `frontend` (where Rails' own `core` lives), resolution-order-dependent —
-    # the failure the Global repository recorded in
-    # `notes/implementation/2026-08-11-cloudflare-tunnel-edge-network-join.md`.
+    # `edge.localhost` is the stable alias used by the local Tunnel connector.
+    # Podman registers service names on every network a container joins, so the
+    # explicit alias keeps the Tunnel origin independent of this service name.
     #
-    # One alias covers every unit because this container serves all twenty on
+    # One alias covers every unit because this container serves all twelve on
     # their own ports. Rails needs one alias per surface only because it
     # distinguishes them by Host on a single port.
     networks:
