@@ -10,36 +10,14 @@ API) as standard, plus — only if the developer opts in through the optional
 `known_hosts`. No key material crosses any of them — see
 [Git and GitHub access](git-and-github-access.md).
 
-`compose.yaml` plus `.devcontainer/compose.yaml` are a complete standard environment: a
+`compose.yaml` plus `compose.workspace.yaml` are a complete standard environment: a
 fresh clone starts with no
 local file created.
 
-## Dev Container startup
+## Startup
 
-After setting this repository's own `CLOUDFLARED_TOKEN` in the gitignored root `.env`, start the
-Dev Container through Dev Containers CLI, from the repository root:
-
-```bash
-scripts/devcontainer-up
-```
-
-The launcher is the CLI integration surface. It serializes the CLI's fixed-name temporary
-Feature image across cooperating repositories; none of its Podman options
-can move into `devcontainer.json`. `--docker-path` selects the engine, and
-`PODMAN_COMPOSE_PROVIDER` selects the Compose implementation: with Podman as the engine the
-CLI invokes `podman compose`, which delegates to an external provider and prefers
-`docker-compose` when a Docker installation is present on the host. Omitting the variable
-fails against a Docker daemon socket that does not exist.
-
-Rootless verification, the root/sudo refusal, and the workspace-bind credential-file
-preflight are no longer performed at startup. They remain requirements:
-[Dev Containers CLI startup on rootless Podman](devcontainer-cli-podman-startup.md) states
-them, and `scripts/dev-start` still enforces its own copies on the direct Compose path.
-
-## Direct Compose modes
-
-The separate direct Compose entrypoint remains available for the optional Rails and Tunnel
-overlays:
+Start the environment with `scripts/dev-start`; it also takes the optional Rails and Tunnel
+flags:
 
 ```bash
 scripts/dev-start
@@ -59,7 +37,7 @@ Credentials are obtained inside the running container through browser logins —
 Enter the interactive service with:
 
 ```bash
-podman compose exec core bash -l
+podman compose -f compose.yaml -f compose.workspace.yaml exec core bash -l
 ```
 
 Node.js is pinned to 24.21.0 and pnpm to 12.11.2, both declared in

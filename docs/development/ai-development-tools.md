@@ -1,6 +1,6 @@
 # AI development tools
 
-Claude and Codex are installed independently inside the image by devcontainer features. No
+Claude and Codex are installed inside the image by the `Containerfile`. No
 host AI state is mounted, no API key is injected, and no permission bypass is enabled.
 
 Both authenticate through their own browser login, initiated from inside the container. The

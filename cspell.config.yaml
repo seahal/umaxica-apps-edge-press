@@ -28,7 +28,7 @@ useGitignore: true
 ignorePaths:
   # The repository's own object database. `check:spelling` passes `--dot` so the
   # dot-directories that DO hold reviewed prose are covered — .github/,
-  # .devcontainer/, .vscode/, .cspell/ — and .git/ is the one that must not be:
+  # .vscode/, .cspell/ — and .git/ is the one that must not be:
   # git does not gitignore itself, so without this line CSpell decompresses
   # every loose object and reports the base64 inside it. It is not a suppression
   # of anything anyone wrote.

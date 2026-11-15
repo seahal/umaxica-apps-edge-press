@@ -13,13 +13,12 @@ const repoRoot = join(import.meta.dirname, '..');
 const read = (relativePath: string) => readFileSync(join(repoRoot, relativePath), 'utf8');
 
 const composeBase = read('compose.yaml');
-const composeDevcontainer = read('.devcontainer/compose.yaml');
+const composeWorkspace = read('compose.workspace.yaml');
 // `compose.override.yaml` is the OPTIONAL developer-local override: gitignored,
 // absent on a fresh clone, never created automatically, and carrying arbitrary
 // host-specific edits where it exists. Only the tracked example can be asserted
 // on, and it is documentation rather than a required input.
 const composeOverrideExample = read('compose.override.yaml.example');
-const devcontainer = read('.devcontainer/devcontainer.json');
 
 /**
  * Every compose file that can define a service, checked as one set.
@@ -77,7 +76,7 @@ describe('Edge-owned tunnel connector', () => {
   it('keeps exactly three compose files, each with a distinct role', () => {
     // The assertions above are only as complete as this list: the shared
     // services and the per-unit dev servers are in `compose.yaml`, `core` is in
-    // `.devcontainer/compose.yaml`, and everything machine-specific goes in the
+    // `compose.workspace.yaml`, and everything machine-specific goes in the
     // optional `compose.override.yaml` that `compose.override.yaml.example`
     // documents. A new file must be added here to be covered, so make the
     // omission fail.
@@ -89,8 +88,8 @@ describe('Edge-owned tunnel connector', () => {
       .filter((path) => /(?:^|\/)compose\..*ya?ml(?:\.example)?$/u.test(path))
       .sort();
     expect(trackedCompose).toEqual([
-      '.devcontainer/compose.yaml',
       'compose.override.yaml.example',
+      'compose.workspace.yaml',
       'compose.yaml',
     ]);
 
@@ -104,7 +103,7 @@ describe('Edge-owned tunnel connector', () => {
   });
 
   it('defines one hardened connector without a cross-project network', () => {
-    // `core` is the only service in the Dev Container's file, and the connector is
+    // `core` is the only service in the workspace file, and the connector is
     // the only service in `compose.yaml` without a profile -- the twelve dev
     // servers all sit behind `profiles: [app]`, so a bare `podman compose up`
     // starts the connector and nothing else.
@@ -112,7 +111,7 @@ describe('Edge-owned tunnel connector', () => {
       const block = /^services:\n((?: .*\n|\n)*)/mu.exec(text)?.[1] ?? '';
       return [...block.matchAll(/^ {2}([a-z0-9][\w-]*):/gmu)].map((match) => match[1] as string);
     };
-    expect(namesIn(composeDevcontainer)).toEqual(['core']);
+    expect(namesIn(composeWorkspace)).toEqual(['core']);
 
     const alwaysStarted = namesIn(composeBase).filter((name) => {
       const body =
@@ -129,29 +128,6 @@ describe('Edge-owned tunnel connector', () => {
     expect(connector).toContain('no-new-privileges:true');
     expect(connector).toContain('cap_drop:');
     expect(connector).toContain('restart: on-failure:3');
-  });
-
-  it('starts the connector with the standard devcontainer lifecycle', () => {
-    // Invariant B: exactly two compose files, both tracked, so the Dev
-    // Container configuration resolves on a fresh clone with no local file
-    // creation. `core` is defined in the second one, which is what keeps it out
-    // of a bare `podman compose up`. The Dev Containers CLI passes every entry to Compose as `-f`,
-    // so any entry that a clone does not contain fails the whole `up` with a
-    // bare `no such file or directory` — which is how Codespaces used to break
-    // on the retired developer-local overlay.
-    //
-    // The same `-f` means Compose does not auto-discover `compose.override.yaml`
-    // here; the optional override reaches only `scripts/dev-start` and a bare
-    // `docker compose`. `compose-local-override-invariants.test.ts` proves every
-    // listed entry is a tracked file.
-    expect(devcontainer).toContain('"dockerComposeFile": ["../compose.yaml", "./compose.yaml"]');
-    // Compose takes the project name from the last file that sets one, so a
-    // divergent `name:` in an override forks the project away from
-    // `compose.yaml` and `scripts/dev-start` — a second volume set, and a port
-    // clash with the containers `--remove-existing-container` then fails to
-    // find. The example shows the right value.
-    expect(composeOverrideExample).toMatch(/^name: umaxica-apps-edge-press$/mu);
-    expect(devcontainer).toContain('"runServices": ["core", "cloudflare-tunnel"]');
   });
 
   /*

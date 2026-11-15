@@ -1,19 +1,15 @@
-# The Dev Container's own half of the development environment.
-#
-# This file holds `core` -- and nothing else. `core` is the workspace container:
-# it exists to be attached to by an editor, it runs `sleep infinity`, and it is
-# useless to anyone who is not opening the Dev Container. Keeping it here rather
-# than in `compose.yaml` is what makes a bare `podman compose up` start the
-# shared services and nothing else.
+# `core`, the workspace container -- and nothing else. It runs `sleep infinity`
+# and you start the Core dev servers inside it by hand (`podman exec`). Keeping
+# it out of `compose.yaml` is what makes a bare `podman compose up` start the
+# shared services and nothing else; `scripts/dev-start` loads both files.
 #
 # `name:` matches `compose.yaml` on purpose. Compose keys its networks and its
-# named volumes by project name, so the Dev Container, `scripts/dev-start` and a
-# bare `podman compose` still resolve to one set of containers and volumes.
+# named volumes by project name, so `scripts/dev-start` and a bare
+# `podman compose` resolve to one set of containers and volumes.
 #
-# Relative paths still resolve against the repository root, not against this
-# directory: Compose resolves them against the project directory, which is the
-# directory holding the FIRST `-f` file, and `devcontainer.json` lists
-# `../compose.yaml` first. This file is therefore not usable on its own.
+# Relative paths resolve against the repository root: Compose takes the project
+# directory from the FIRST `-f` file, and `scripts/dev-start` lists
+# `compose.yaml` first. This file is therefore not usable on its own.
 name: umaxica-apps-edge-press
 
 services:

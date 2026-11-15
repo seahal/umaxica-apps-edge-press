@@ -6,55 +6,29 @@
  *   compose.override.yaml.example = tracked documentation, never required
  *
  * A fresh `git clone` plus a container engine must be enough to start the
- * development environment and to open the Dev Container, on Ubuntu and on
+ * development environment, on Ubuntu and on
  * RHEL/Fedora with SELinux Enforcing, under Docker and under rootless Podman.
  * Nothing here may need a file the clone does not contain.
  *
  * These checks read files, so they need no container engine. The one that does
  * (the merge check) skips itself when none is installed.
  */
-import { execFileSync, spawnSync } from 'node:child_process';
-import { copyFileSync, existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { spawnSync } from 'node:child_process';
+import { copyFileSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
-
-import { parseJsonc } from '../tools/lib/wrangler-config.mjs';
 
 const repoRoot = join(import.meta.dirname, '..');
 const read = (relativePath: string) => readFileSync(join(repoRoot, relativePath), 'utf8');
 
 const composeBase = read('compose.yaml');
 // `core` moved here so a bare `podman compose up` does not start it.
-const composeDevcontainer = read('.devcontainer/compose.yaml');
+const composeWorkspace = read('compose.workspace.yaml');
 const overrideExample = read('compose.override.yaml.example');
-const devcontainerSource = read('.devcontainer/devcontainer.json');
 const devStart = read('scripts/dev-start');
 const gitignore = read('.gitignore');
-
-function trackedFiles(): string[] {
-  const injected = process.env['EDGE_TRACKED_FILES'];
-  if (injected !== undefined) {
-    return injected.split('\n').filter(Boolean);
-  }
-  return execFileSync('git', ['ls-files'], { cwd: repoRoot, encoding: 'utf8' })
-    .split('\n')
-    .filter(Boolean);
-}
-
-/**
- * `devcontainer.json` is JSON with comments, and the comments here carry the
- * reasoning. It is also JSONC in full: the Dev Containers CLI parses it with
- * `jsonc-parser`, so a trailing comma before a `}` is as legal as a comment.
- * `parseJsonc` is the repository's string-aware reader -- the same one
- * `wrangler.jsonc` goes through -- so the assertions describe the
- * configuration rather than the prose, and a legal edit to the file cannot
- * fail this suite for a syntax the CLI accepts.
- */
-function parseDevcontainer(): { dockerComposeFile: string[] } {
-  return parseJsonc(devcontainerSource) as { dockerComposeFile: string[] };
-}
 
 /** Compose text with its comment lines removed, so prose cannot satisfy a check. */
 const directives = (source: string) =>
@@ -64,27 +38,6 @@ const directives = (source: string) =>
     .join('\n');
 
 describe('optional local Compose override', () => {
-  it('resolves the Dev Container from tracked files only', () => {
-    // Invariant B, and the regression guard for the original bug: the Dev
-    // Containers CLI passes each `dockerComposeFile` entry to Compose as `-f`,
-    // and a missing entry fails configuration resolution outright:
-    //   open .../compose.custom.yaml: no such file or directory
-    // A gitignored file is therefore never a legal entry.
-    const tracked = new Set(trackedFiles());
-    const entries = parseDevcontainer().dockerComposeFile;
-    expect(entries.length).toBeGreaterThan(0);
-
-    for (const entry of entries) {
-      // Entries are relative to `devcontainer.json`, which lives in `.devcontainer/`.
-      const fromRepoRoot = join('.devcontainer', entry).replaceAll('\\', '/');
-      const normalised = fromRepoRoot.startsWith('.devcontainer/../')
-        ? fromRepoRoot.slice('.devcontainer/../'.length)
-        : fromRepoRoot;
-      expect(existsSync(join(repoRoot, normalised)), `${entry} is missing`).toBe(true);
-      expect(tracked.has(normalised), `${entry} is not tracked by git`).toBe(true);
-    }
-  });
-
   it('keeps nothing host-specific in the standard environment', () => {
     // Invariant C. `compose.yaml` is interpolated in full whatever service is
     // being started, so a required `${VAR:?}` anywhere in it stops a machine
@@ -103,14 +56,14 @@ describe('optional local Compose override', () => {
     // The bind mounts here carry no `:z`/`:Z` on purpose — those relabel the
     // HOST tree — and `label=disable` is scoped to this one container and is
     // inert on hosts without SELinux, under both Docker and Podman.
-    const core = /^ {2}core:\n((?: {4}.*\n|\n)*)/mu.exec(composeDevcontainer)?.[1] ?? '';
+    const core = /^ {2}core:\n((?: {4}.*\n|\n)*)/mu.exec(composeWorkspace)?.[1] ?? '';
     expect(core).not.toBe('');
     expect(core).toContain('label=disable');
     // The twelve dev servers are the same image on the same bind, so they need the
     // same opt-out; they share it through the `*unit` anchor.
     expect(composeBase).toContain('label=disable');
     expect(directives(composeBase)).not.toMatch(/:\s*[zZ]\b/u);
-    expect(directives(composeDevcontainer)).not.toMatch(/:\s*[zZ]\b/u);
+    expect(directives(composeWorkspace)).not.toMatch(/:\s*[zZ]\b/u);
   });
 
   it('never requires the override to exist', () => {
@@ -139,7 +92,7 @@ describe('optional local Compose override', () => {
     // than none. It must also stay free of secrets and private keys.
     // Both files, because `scripts/dev-start` -- the override's main consumer --
     // loads them together, and `core` is the service the example overrides.
-    const services = [composeBase, composeDevcontainer].flatMap((text) =>
+    const services = [composeBase, composeWorkspace].flatMap((text) =>
       [...text.matchAll(/^ {2}([a-z0-9][\w-]*):/gmu)].map((m) => m[1]),
     );
     const exampleServices = [
@@ -169,15 +122,14 @@ describe('optional local Compose override', () => {
       copyFileSync(join(repoRoot, 'compose.override.yaml.example'), overridePath);
       const merged = spawnSync(
         engine as string,
-        // The same file list the Dev Container passes (`dockerComposeFile` in
-        // .devcontainer/devcontainer.json): `core`, which the example
-        // overrides, is defined in .devcontainer/compose.yaml, not compose.yaml.
+        // The same file list `scripts/dev-start` passes: `core`, which the
+        // example overrides, is defined in compose.workspace.yaml.
         [
           'compose',
           '-f',
           'compose.yaml',
           '-f',
-          '.devcontainer/compose.yaml',
+          'compose.workspace.yaml',
           '-f',
           overridePath,
           'config',

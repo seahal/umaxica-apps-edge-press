@@ -1,7 +1,7 @@
 # The shared development environment: the Cloudflare Tunnel connector, the
 # networks, the named volumes, and -- behind the `app` profile -- one dev-server
 # service per workspace unit. A fresh `git clone` plus a container engine must be
-# enough to start it and to open the Dev Container -- on Ubuntu, and on
+# enough to start it -- on Ubuntu, and on
 # RHEL/Fedora with SELinux Enforcing, under Docker and under rootless Podman.
 # Nothing here may require a file a clone does not contain, and nothing here may
 # use a required `${VAR:?}` interpolation: Compose interpolates the whole file
@@ -15,10 +15,10 @@
 #                                      servers from wherever you like.
 #   podman compose --profile app up    the above plus the twelve dev servers,
 #                                      one container each. No editor.
-#   Open in Dev Container              the above minus the twelve, plus `core`
-#                                      from `.devcontainer/compose.yaml` -- a
-#                                      workspace container to attach to, from
-#                                      which you start dev servers by hand.
+#   scripts/dev-start                  the above minus the twelve, plus `core`
+#                                      from `compose.workspace.yaml` -- a
+#                                      workspace container from which you
+#                                      start dev servers by hand.
 #
 # `core` and the per-unit services publish the same host ports, so at most one of
 # the two shapes runs at a time.
@@ -28,18 +28,17 @@
 # has to create it; Compose auto-discovers it when no `-f` is given, and
 # `scripts/dev-start` loads it when it exists.
 #
-# The one compose project for this repository: `.devcontainer/devcontainer.json`,
-# `.devcontainer/compose.yaml`, `scripts/dev-start` and a bare `podman compose`
-# all resolve to this same name, so they share one set of containers and volumes.
+# The one compose project for this repository: `compose.workspace.yaml`,
+# `scripts/dev-start` and a bare `podman compose` all resolve to this same name, so they share one set of containers and volumes.
 # An override must repeat it.
 name: umaxica-apps-edge-press
 
 # The twelve dev servers, one Compose service per workspace unit, WITHOUT the
-# Dev Container.
+# workspace container.
 #
-# `core` (.devcontainer/compose.yaml) and these are the same image and the same
+# `core` (compose.workspace.yaml) and these are the same image and the same
 # workspace bind; they differ only in what PID 1 does. `core` sleeps and waits
-# for an editor to attach, and you start `pnpm --dir com/docs run dev` inside it
+# for you to exec into it, and you start `pnpm --dir com/docs run dev` inside it
 # by hand. Each service below instead IS one of those dev servers, so
 #
 #     podman compose --profile app up com-docs
@@ -54,10 +53,10 @@ name: umaxica-apps-edge-press
 # scripts is what makes the server reachable from outside its container.
 #
 # They are behind the `app` profile so a bare `podman compose up` starts the
-# shared services only -- the shape the Dev Container needs, and the shape you
+# shared services only -- the shape you
 # want before running a build or a test suite by hand. Each service publishes
 # the same host port `core` does, so `core` and any of these are mutually
-# exclusive: stop the Dev Container first.
+# exclusive: stop `core` first.
 x-unit: &unit
   profiles:
     - app
@@ -69,8 +68,7 @@ x-unit: &unit
       CONTAINER_GID: 1000
       CONTAINER_USER: edge
       CONTAINER_GROUP: edge
-  # Dependencies are installed first because, unlike the Dev Container, nothing
-  # here runs `postCreateCommand`. `node-volume` is shared with `core`, so
+  # Dependencies are installed first because nothing else installs them here. `node-volume` is shared with `core`, so
   # whichever entry point runs first populates it for the others; the twelve
   # services then find it already installed and `--frozen-lockfile` is a no-op.
   command:
@@ -101,7 +99,7 @@ x-unit: &unit
   # `edge-tunnel` is the cross-repository network Global's `cloudflare-tunnel-edge`
   # connector joins to reach a dev server here. `core` claims the alias
   # `edge.localhost` on it, which is what a Global ingress rule addresses while the
-  # Dev Container is what is running. These twelve carry no alias -- twelve
+  # workspace container is what is running. These twelve carry no alias -- twelve
   # containers cannot share one name -- so against `--profile app` a Global ingress
   # rule names the unit's own service instead, e.g. `http://com-docs:5106`.
   networks:
@@ -200,14 +198,10 @@ services:
   # per-developer, and that arrives from the gitignored `.env`. Starting it is still
   # opt-in — `scripts/dev-start` names `core` alone unless `--tunnel` is passed.
   #
-  # No `depends_on: core`. Podman turns a Compose dependency into a container
-  # dependency, and the Dev Containers CLI's `--remove-existing-container` runs a
-  # bare `podman rm -f <core>` with no `--depend`, which then fails with
-  #   has dependent containers which must be removed before it
-  # and takes the whole `devcontainer up` down with it. The ordering bought
-  # nothing in return: the connector dials Cloudflare outbound and resolves
-  # `core` per request, so starting first costs at most a 502 until `core`
-  # answers, and `devcontainer up` names both services in one `up` anyway.
+  # No `depends_on: core`: Podman turns a Compose dependency into a container
+  # dependency, which makes a bare `podman rm -f <core>` fail. The ordering buys
+  # nothing: the connector dials Cloudflare outbound and resolves `core` per
+  # request, so starting first costs at most a 502 until `core` answers.
   cloudflare-tunnel:
     image: docker.io/cloudflare/cloudflared:2026.8.2
     command: tunnel --protocol quic --metrics 0.0.0.0:2000 run

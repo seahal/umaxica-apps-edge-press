@@ -33,7 +33,7 @@ function trackedUnder(prefix: string): string[] {
 /**
  * Every compose file this repository tracks. `compose.yaml` carries the shared
  * services and, behind the `app` profile, the twelve dev servers;
- * `.devcontainer/compose.yaml` carries `core`, the workspace container, which
+ * `compose.workspace.yaml` carries `core`, the workspace container, which
  * lives there so a bare `podman compose up` does not start it. Between them they
  * hold the SELinux relabel opt-out and the forwarded `GH_TOKEN`.
  * `compose.override.yaml.example` documents the OPTIONAL developer-local
@@ -44,7 +44,7 @@ function trackedUnder(prefix: string): string[] {
  */
 const composeFiles = [
   'compose.yaml',
-  '.devcontainer/compose.yaml',
+  'compose.workspace.yaml',
   'compose.override.yaml.example',
 ] as const;
 const compose = composeFiles.map((path) => read(path)).join('\n');
@@ -70,7 +70,6 @@ const instructions = containerfile
   .split('\n')
   .filter((line) => !line.trimStart().startsWith('#'))
   .join('\n');
-const devcontainer = read('.devcontainer/devcontainer.json');
 
 describe('development-container security contract', () => {
   it('uses Containerfile as the only repository-owned build definition', () => {
@@ -117,7 +116,6 @@ describe('development-container security contract', () => {
       'docker.sock',
     ];
     for (const value of forbidden) {
-      expect(devcontainer, `devcontainer contains ${value}`).not.toContain(value);
       expect(compose, `compose contains ${value}`).not.toContain(value);
     }
 
@@ -129,10 +127,9 @@ describe('development-container security contract', () => {
      * entry above. The contract it has to satisfy is asserted in full by
      * `forwards only the host ssh-agent socket…` below.
      *
-     * Here we only pin WHERE it may appear: never in the editor's own
-     * configuration, and never in the file every developer shares.
+     * Here we only pin WHERE it may appear: never in the file every
+     * developer shares.
      */
-    expect(devcontainer, 'devcontainer contains SSH_AUTH_SOCK').not.toContain('SSH_AUTH_SOCK');
     expect(read('compose.yaml'), 'the shared compose file forwards an agent').not.toContain(
       'SSH_AUTH_SOCK',
     );
@@ -151,8 +148,6 @@ describe('development-container security contract', () => {
    * test failing, however it is spelled.
    */
   it('forwards only a read-only known_hosts, and no ssh-agent socket', () => {
-    expect(devcontainer, 'devcontainer references .ssh').not.toContain('/.ssh');
-
     // Comments are stripped first: the compose files discuss credentials at
     // length, and that prose must not be what fails the check.
     const directives = (path: string): string =>
@@ -225,22 +220,10 @@ describe('development-container security contract', () => {
     expect(instructions, 'the tailscale wrapper escalates').not.toMatch(/\bsudo\b/u);
     expect(instructions).not.toMatch(/--ssh\b|funnel/iu);
 
-    // `.devcontainer/` holds its two JSON files, plus the Compose file that
-    // defines `core`, and nothing else. Every script that used to live beside
-    // them is gone, and the wrapper the image needs is a heredoc in the
-    // Containerfile rather than another file here.
-    //
-    // This reads what git tracks, not what `readdirSync` finds. A fresh clone
-    // is the thing under test, and only tracked files reach one; a developer's
-    // gitignored leftover -- `.devcontainer/devcontainer.custom.yaml` is
-    // ignored by name at `.gitignore` precisely so an existing local copy
-    // stays invisible -- is not a change to the image's attack surface and
-    // must not fail this contract.
-    expect(trackedUnder('.devcontainer/'), '.devcontainer/ gained a tracked file').toEqual([
-      'compose.yaml',
-      'devcontainer-lock.json',
-      'devcontainer.json',
-    ]);
+    // The Dev Container was retired; nothing under `.devcontainer/` may come
+    // back. This reads what git tracks, so a developer's gitignored leftover
+    // does not fail the contract.
+    expect(trackedUnder('.devcontainer/'), '.devcontainer/ gained a tracked file').toEqual([]);
   });
 
   it('masks .secrets/ behind an empty read-only volume', () => {
@@ -372,12 +355,6 @@ describe('development-container security contract', () => {
   it('keeps TTY and stdin on the interactive core only', () => {
     expect(compose.match(/^\s+tty:\s*true$/gmu) ?? []).toHaveLength(1);
     expect(compose.match(/^\s+stdin_open:\s*true$/gmu) ?? []).toHaveLength(1);
-  });
-
-  it('does not retain dangerous editor or AI bypasses', () => {
-    expect(devcontainer).not.toContain('allowDangerouslySkipPermissions');
-    expect(devcontainer).not.toContain('extensions.verifySignature');
-    expect(devcontainer).not.toMatch(/dangerously-skip-permissions|bypassPermissions/iu);
   });
 
   it('has no long-lived credential injection path left', () => {

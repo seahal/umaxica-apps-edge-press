@@ -103,10 +103,8 @@ RUN npm rm --global corepack \
     "opencode-ai@${OPENCODE_VERSION}" \
   && npm cache clean --force
 
-# The group is named after the user on purpose. Devcontainer features are
-# third-party scripts, and several of them chown their state with a literal
-# `${_REMOTE_USER}:${_REMOTE_USER}` — a group named
-# anything else makes those installs fail with "chown: invalid group".
+# The group is named after the user on purpose, so `edge:edge` ownership is
+# unambiguous wherever a tool sets ownership with a literal `user:user`.
 #
 # `.ssh` is created empty, 0700, owned by the login account. No key material is
 # ever placed there: an optional `compose.override.yaml` may bind the host's
@@ -157,9 +155,8 @@ RUN set -eux; \
 # capability needed -- and starts that daemon on first use, so a plain
 # `tailscale up` works in a fresh shell.
 #
-# Written here rather than COPYed from `.devcontainer/`: this is the only thing
-# the image needs from the host besides the build context itself, and a heredoc
-# keeps `.devcontainer/` down to `devcontainer.json` and its lock file. It lands
+# Written as a heredoc rather than COPYed from the build context: this is the
+# only thing the image needs from the host besides the build context itself. It lands
 # 0555 under root ownership, so the workspace bind -- which `edge` owns and any
 # development shell can write -- cannot influence what a `tailscale` call runs.
 RUN cat > /usr/local/bin/tailscale <<'WRAPPER' && chmod 0555 /usr/local/bin/tailscale

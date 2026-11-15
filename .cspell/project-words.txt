@@ -93,7 +93,7 @@ Noto
 chws        # the OpenType tag for contextual half-width spacing
 
 # --- Dev container features and editor extension publishers, quoted verbatim
-# --- from .devcontainer/ and .vscode/ identifiers.
+# --- from .vscode/ identifiers and the retired dev container setup.
 aiassistant
 bradlc
 csjones

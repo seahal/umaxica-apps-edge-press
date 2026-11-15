@@ -16,7 +16,7 @@ The two opt-in rows are host-specific: the agent socket path differs per machine
 `known_hosts` may not exist at all, and either missing source fails the bind before any
 container starts. So they live in the optional
 [`compose.override.yaml`](../../README.md#the-three-compose-files) rather than in the
-standard environment, and the Dev Container does not load them at all. Use `gh` over HTTPS
+standard environment. Use `gh` over HTTPS
 if you have not opted in.
 
 `gh auth login` is not part of this flow and must not be relied on. `gh` resolves tokens
@@ -39,8 +39,8 @@ test -f ~/.ssh/known_hosts       # must be a regular FILE, or Podman creates a d
 export GH_TOKEN="$(gh auth token)"   # persist this in the shell profile
 ```
 
-Both variables must be exported in the shell that runs `scripts/dev-start` or
-`devcontainer up`: Compose reads that process environment, not the container's.
+Both variables must be exported in the shell that runs `scripts/dev-start`:
+Compose reads that process environment, not the container's.
 `scripts/dev-start` refuses to start only when your own override binds `known_hosts` and
 the host file is missing, and it warns when either variable is unset. Neither is required —
 an agent-less, token-less host still boots, it just cannot reach GitHub over SSH.

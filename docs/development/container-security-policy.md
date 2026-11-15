@@ -25,9 +25,8 @@ asserts the exact set of `.ssh` paths in `compose.override.yaml.example` — one
 one target — so a
 private key (`id_rsa`, `id_ed25519`, …), a whole-directory `~/.ssh` bind, or a second
 mount of any kind fails the test however it is spelled. `compose.yaml`, the file every
-developer shares and the only one the Dev Container loads, must contain neither
-`SSH_AUTH_SOCK` nor any `.ssh` path, and `.devcontainer/devcontainer.json` must contain
-neither either.
+developer shares, must contain neither
+`SSH_AUTH_SOCK` nor any `.ssh` path.
 
 The optional override is never required: the two tracked compose files are a complete standard
 environment, so a fresh clone starts with _none_ of the SSH inputs above. Adding them is
@@ -46,7 +45,7 @@ Normal ports and the temporary OAuth callback are published on `127.0.0.1` only.
 
 There is no SSH server in the image, and none may be added: the forwarded agent is an
 _outbound_ credential, and nothing about it justifies an inbound path. Development shells
-reach `core` through `devcontainer exec` or `podman exec`. The Tailscale client is
+reach `core` through `podman exec`. The Tailscale client is
 present, pinned, and started by nothing — `tailscale up` is an interactive browser login,
 in userspace-networking mode, needing no capability and no key file. The AI CLIs likewise
 sign in themselves through their own browser flows.

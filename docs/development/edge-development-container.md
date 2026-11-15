@@ -17,24 +17,12 @@ host user lands on 1000 inside the container regardless of its id on the host. H
 the XDG config/cache/data/state paths are writable without sudo. The image creates exact
 tool paths at build time.
 
-Start the credential-free Dev Container through Dev Containers CLI from the repository root:
-
-```bash
-scripts/devcontainer-up
-```
-
-The launcher supplies the engine flag and the `PODMAN_COMPOSE_PROVIDER` variable, which have
-no `devcontainer.json` equivalent; everything else is Compose configuration the CLI reads on
-its own.
-[Dev Containers CLI startup on rootless Podman](devcontainer-cli-podman-startup.md) explains
-why each flag is required and what the removed `podman/tools/dcup` used to enforce.
-
-The optional direct-Compose workflows remain available separately:
+Start and enter the workspace container from the repository root:
 
 ```bash
 scripts/dev-build
 scripts/dev-start [--rails] [--tunnel]
-podman compose exec core bash -l
+podman compose -f compose.yaml -f compose.workspace.yaml exec core bash -l
 node --version
 pnpm --version
 ```
