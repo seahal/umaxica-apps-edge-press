@@ -98,7 +98,7 @@ catalog:
   # EXACT peer on the runner. `vitest` below is therefore exact too, at the same
   # version, and the two are only ever bumped together. That pairing is what
   # lets this file carry no `peerDependencyRules` exception for vitest.
-  '@vitest/coverage-v8': 5.1.0
+  '@vitest/coverage-v8': 5.1.1
   # The spell checker. Pinned here rather than per unit because the dictionary
   # it reads (.cspell/project-words.txt) is repository-wide: a unit resolving a
   # different major could disagree about what the config file even means.
